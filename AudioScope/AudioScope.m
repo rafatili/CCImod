@@ -66,10 +66,9 @@ function AudioScope_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for AudioScope
 handles.output = hObject;
 global fs; fs = 16000;
-% add common functions path to the current directory
-currentFolder = pwd; CCIMobileFolder = fileparts(currentFolder); %currentFolder(1:end-10);
-CommonFunctionsFolder = [CCIMobileFolder '\CommonFunctions\'];
-addpath(CommonFunctionsFolder);
+% add common functions path to the current directory (*RC already added by function init.m)
+currentFolder = pwd; 
+%(*RC) deleted lines
 
 % Update handles structure
 guidata(hObject, handles);

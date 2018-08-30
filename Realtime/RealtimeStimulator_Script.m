@@ -19,10 +19,9 @@ electrodogram_plot = 1; % = 1 will plot the electrodogram.
 % which could impact the performance and realtime capabilities.
 % For large time durations, set electrodogram_plot = 0;
 
-% add common functions path to the current directory
-currentFolder = pwd; CCIMobileFolder = fileparts(currentFolder); %currentFolder(1:end-8);
-CommonFunctionsFolder = [CCIMobileFolder '\CommonFunctions\'];
-addpath(CommonFunctionsFolder);
+% add common functions path to the current directory (*RC already added by function init.m)
+currentFolder = pwd; 
+%(*RC) deleted lines
 
 % Initialize
 p = initialize_ACE_integer_ppf;

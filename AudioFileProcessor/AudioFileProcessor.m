@@ -26,6 +26,8 @@ function varargout = AudioFileProcessor(varargin)
 
 % Last Modified by GUIDE v2.5 13-Oct-2016 21:54:22
 
+% Modifyed by Rafael Chiea on 30/08/2018 - adapted to unix OS (filesep)
+
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
@@ -57,10 +59,10 @@ function AudioFileProcessor_OpeningFcn(hObject, eventdata, handles, varargin)
 % Choose default command line output for AudioFileProcessor
 handles.output = hObject;
 
-% add common functions path to the current directory
-currentFolder = pwd; CCIMobileFolder = fileparts(currentFolder); %currentFolder(1:end-18);
-CommonFunctionsFolder = [CCIMobileFolder '\CommonFunctions\'];
-addpath(CommonFunctionsFolder);
+% add common functions path to the current directory (*RC already added by function init.m)
+currentFolder = pwd; 
+%(*RC) deleted lines
+
 handles.start_dir = currentFolder; handles.current_dir = currentFolder;
 guidata(hObject, handles);
 
@@ -146,7 +148,7 @@ if strcmp(get(handles.figure1,'SelectionType'),'open')
         if strcmp(filename,'..')
             filename = fileparts(handles.current_dir);
         else
-            filename = [handles.current_dir '\' filename];
+            filename = [handles.current_dir filesep filename];
         end
         handles.current_dir = filename;
         guidata(hObject,handles);
@@ -270,7 +272,7 @@ new_index=index_selected-1;
 set(handles.listbox1,'Value',new_index);
 file_list = get(handles.listbox1,'String');
 filename = cell2mat(file_list(new_index));
-faddress=[handles.current_dir '\' filename];
+faddress=[handles.current_dir filesep filename];
 [pathstr,name,extension] = fileparts(faddress);
 if (strcmp(extension,'.wav')==1)
     stimulate(faddress, handles.parameters);
@@ -294,7 +296,7 @@ disable_buttons(handles);
 index_selected = get(handles.listbox1,'Value');
 file_list = get(handles.listbox1,'String');
 filename = cell2mat(file_list(index_selected));
-faddress=[handles.current_dir '\' filename];
+faddress=[handles.current_dir filesep filename];
 [pathstr,name,extension] = fileparts(faddress);
 if (strcmp(extension,'.wav')==1)
     stimulate(faddress, handles.parameters);
@@ -323,7 +325,7 @@ new_index=index_selected+1;
 set(handles.listbox1,'Value',new_index);
 file_list = get(handles.listbox1,'String');
 filename = cell2mat(file_list(new_index));
-faddress=[handles.current_dir '\' filename];
+faddress=[handles.current_dir filesep filename];
 [pathstr,name,extension] = fileparts(faddress);
 if (strcmp(extension,'.wav')==1)
     stimulate(faddress, handles.parameters);

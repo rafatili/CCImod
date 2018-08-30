@@ -57,10 +57,9 @@ handles.output = hObject;
 
 global fs; fs = 16000;
 
-% add common functions path to the current directory
-currentFolder = pwd; CCIMobileFolder = fileparts(currentFolder); %currentFolder(1:end-4);
-CommonFunctionsFolder = [CCIMobileFolder '\CommonFunctions\'];
-addpath(CommonFunctionsFolder);
+% add common functions path to the current directory (*RC already added by function init.m)
+currentFolder = pwd; 
+%(*RC) deleted lines
 
 p = initialize_ACE_integer_ppf;
 handles.parameters = p;
