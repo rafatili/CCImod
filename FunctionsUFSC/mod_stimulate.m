@@ -10,7 +10,7 @@ end
 if (isfield(map,'Right') ==1)
     map.Right.lr_select = 'right'; %%% right - - - Process the right implant first
     audio_signal  = AudioSignal( filename, map.Right.lr_select );
-    stimuli.right = modACE_Process(audio_signal,map.Right);
+    stimuli.right = ufscACEprocessFFT(audio_signal,map.Right);
 end
 stimuli.map=map;
 
