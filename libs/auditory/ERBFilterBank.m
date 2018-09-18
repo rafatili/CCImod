@@ -9,10 +9,13 @@ function output = ERBFilterBank(x, fcoefs)
 % the filter coefficients are computed for you assuming a 22050Hz sampling
 % rate and 64 filters regularly spaced on an ERB scale from fs/2 down to 100Hz.
 %
+% 3rd. input parameter is a flag to plot the filters' frequency response
 
 % Malcolm Slaney @ Interval, June 11, 1998.
 % (c) 1998 Interval Research Corporation  
 % Thanks to Alain de Cheveigne' for his suggestions and improvements.
+
+% Modified by Rafael Chiea on 18 Sep 2018: Added plot flag
 
 if nargin < 1
 	error('Syntax: output_array = ERBFilterBank(input_vector[, fcoefs]);');
