@@ -21,12 +21,12 @@ M = ceil(N/p.block_shift);
 v = zeros(nFilters, M);
 for ch = 1:nFilters
     u = buffer(s(ch,:), p.block_size, p.block_size - p.block_shift, []);
-    u = sum(u); % A VER ??
+    u = mean(u); 
     v(ch,:) = u(:);
 end
-
+v = flipud(v);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Gain_proc: Apply gain in dB for each channel
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% v = u .* repmat(p.gains, 1, size(u,2));
+ v = v .* repmat(p.gains, 1, size(v,2));
 

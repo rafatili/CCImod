@@ -1,4 +1,4 @@
-function mod_stimulate( filename , map, plotflag )
+function mod_stimulateFFT( filename , map, plotflag )
 
 %%  Call ACE processing routine
 if (isfield(map,'Left') ==1)
