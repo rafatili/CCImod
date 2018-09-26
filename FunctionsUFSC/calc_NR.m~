@@ -1,0 +1,12 @@
+function NRgains = calc_NR(speech, noise, p)
+%NRgains = calc_NR(speech, noise, p, tech)
+
+%Speech
+[speech, p] = ACE_preEmphasis(speech, p);
+[ Es ] = NR_GammaToneFB( speech, p ); %filtragem usando GammaTone filterbank
+
+%Noise
+[noise, p] = ACE_preEmphasis(noise, p);
+[ En ] = NR_GammaToneFB( noise, p ); %filtragem usando GammaTone filterbank
+end
+

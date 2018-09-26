@@ -1,4 +1,4 @@
-function [ stimulus ] = ufscACEprocessGT_NR( x,p, varargin )
+function [ stimulus ] = ufscACEprocessGT_NR( x,p, NRgains, varargin )
 %UFSCACEPROCESSFFT performs ACE processing
 %INPUT x: input audio
 %      p: MAP structure (.Left or .Right)
@@ -7,6 +7,7 @@ function [ stimulus ] = ufscACEprocessGT_NR( x,p, varargin )
 
 [x, p] = ACE_preEmphasis(x, p);
 [ v ] = ACE_GammaToneFB( x, p ); %filtragem usando GammaTone filterbank
+[ v ] = ACE_filterNR( v, NRgains ); %filtragem usando GammaTone filterbank
 [ v ] = ACE_maximaSelection( v, p );
 [v, ~, ~] = ACE_compression( v, p );
 [ q ] = ACE_mapping( v, p );

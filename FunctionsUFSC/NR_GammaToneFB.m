@@ -1,8 +1,8 @@
-function [ v, fcoefs ] = ACE_GammaToneFB( x, p )
+function [ v, fcoefs ] = NR_GammaToneFB( x, p )
 %ACE_GAMMATONEFB
 %INPUT x: pre-emphasized audio
 %      p: modified MAP from pre-emphasis function
-%OUTPUT v:time-frequency decomposed signal
+%OUTPUT v:time-frequency decomposed energy of the signal
 
 %filterbank
 lowFreq = p.LowerCutOffFrequencies(1);
@@ -21,12 +21,7 @@ M = ceil(N/p.block_shift);
 v = zeros(nFilters, M);
 for ch = 1:nFilters
     u = buffer(s(ch,:), p.block_size, p.block_size - p.block_shift, []);
-    u = mean(u); 
+    u = mean(u.^2); 
     v(ch,:) = u(:);
 end
 v = flipud(v);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Gain_proc: Apply gain in dB for each channel
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- v = v .* repmat(p.gains, 1, size(v,2));
-

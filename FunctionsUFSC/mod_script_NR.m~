@@ -1,0 +1,11 @@
+%test script for the modACE function
+
+p = initialize_ACE;
+handles.parameters = p;
+speechfile = 'S_01_01.wav';
+noisefile = 'icra.wav';
+SNR = ;
+plotflag = 1;
+
+
+mod_stimulateGT_NR(faddress, handles.parameters, plotflag); %use gammatone filters
