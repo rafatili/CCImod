@@ -4,7 +4,7 @@ function mod_stimulateGT_NR( mix, speech, noise , map, plotflag )
 if (isfield(map,'Left') ==1)
     map.Left.lr_select = 'left'; %%% left - - - Process the left implant first
     tech = 'EnvEst'; %noise reduction technique: 'EnvEst', 'WF', 'none'
-    NRgains = calc_NR(speech, noise, map.Left, tech);
+    NRgains = NR_calc(speech, noise, map.Left, tech);
     stimuli.left = ufscACEprocessGT_NR(mix, map.Left, NRgains, plotflag);
 end
 

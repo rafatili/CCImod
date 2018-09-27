@@ -3,11 +3,17 @@
 p = initialize_ACE;
 handles.parameters = p;
 speechfile = 'S_01_01.wav';
-noisefile = 'icra.wav';
-SNRdB = 10;
+noisefile = 'ICRA_No01_16kHz_21s.wav';
+SNRdB = 0;
 %azimuth = 90; %azimuth angle in degrees
 
-%% FUNCTION TO GENERATE Y noisy, X speech AND V noise SIGNALS
+%% GENERATE Y noisy, X speech AND V noise SIGNALS
+% y = x + v
+sgnls = SignalY(speechfile, noisefile, SNRdB);
+y = sgnls.Smix;
+x = sgnls.target;
+v = sgnls.noise;
 
+%% stimulate
 plotflag = 1; %plot electrodogram
 mod_stimulateGT_NR(y,x,v, handles.parameters, plotflag); %use gammatone filters

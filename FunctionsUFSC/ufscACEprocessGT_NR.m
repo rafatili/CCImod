@@ -6,8 +6,8 @@ function [ stimulus ] = ufscACEprocessGT_NR( x,p, NRgains, varargin )
 %OUTPUT stimulus: electric stimuli structure   
 
 [x, p] = ACE_preEmphasis(x, p);
-[ v ] = ACE_GammaToneFB( x, p ); %filtragem usando GammaTone filterbank
-[ v ] = ACE_filterNR( v, NRgains ); %filtragem usando GammaTone filterbank
+[ v ] = ACE_GammaToneFB( x, p ); % GammaTone filterbank
+[ v ] = ACE_filterNR( v, NRgains ); % apply noise reduction
 [ v ] = ACE_maximaSelection( v, p );
 [v, ~, ~] = ACE_compression( v, p );
 [ q ] = ACE_mapping( v, p );
