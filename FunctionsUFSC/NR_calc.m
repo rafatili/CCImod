@@ -13,11 +13,13 @@ function NRgains = NR_calc(speech, noise, p, tech)
 xi = Es./En; %time-frequency SNR
 
 switch tech
+    case 'BM'
+        NRgains = xi>=1;
     case 'WF'
         NRgains = xi./(1 + xi);
     case 'EnvEst'
         a = 2;
-        NRgains = (a*xi.^2 + xi)./(a*xi.^2 + 4*xi + 2);
+        NRgains = sqrt((a*xi.^2 + xi)./(a*xi.^2 + 4*xi + 2));
     case 'none'
         NRgains = ones(size(xi));
     otherwise

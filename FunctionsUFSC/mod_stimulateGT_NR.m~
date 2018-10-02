@@ -1,10 +1,17 @@
-function mod_stimulateGT_NR( mix, speech, noise , map, plotflag )
+function mod_stimulateGT_NR( mix, speech, noise , map, tech, plotflag )
+% mod_stimulateGT_NR( mix, speech, noise , map, tech, plotflag )
+%INPUT: mix     = noisy signal
+%       speech  = target signal
+%       noise   = noise signal
+%       map     = patient's map
+%       tech    = noise reduction technique: 'EnvEst', 'WF', 'BM' or 'none'
+%       plotflag= plot electrodogram? 1 yes; 0 no 
 
 %%  Call ACE processing routine
 if (isfield(map,'Left') ==1)
+    
     map.Left.lr_select = 'left'; %%% left - - - Process the left implant first
-    tech = 'EnvEst'; %noise reduction technique: 'EnvEst', 'WF', 'none'
-    NRgains = calc_NR(speech, noise, map.Left, tech);
+    NRgains = NR_calc(speech, noise, map.Left, tech);
     stimuli.left = ufscACEprocessGT_NR(mix, map.Left, NRgains, plotflag);
 end
 
