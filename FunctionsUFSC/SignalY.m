@@ -52,7 +52,7 @@ classdef SignalY < handle
         end
         %% Sets
         function set.Xfile(obj,xf)
-            if ischar(xf) && strcmp(xf(end-3: end), '.wav')
+            if ischar(xf) && strcmpi(xf(end-3: end), '.wav')
                 obj.Xfile = xf;
                 obj.ldTarget();
                 obj.mix();
@@ -61,7 +61,7 @@ classdef SignalY < handle
             end
         end
         function set.Nfile(obj,nf)
-            if ischar(nf) && strcmp(nf(end-3: end), '.wav')
+            if ischar(nf) && strcmpi(nf(end-3: end), '.wav')
                 obj.Nfile = nf;
                 obj.ldNoise;
                 obj.mix();
