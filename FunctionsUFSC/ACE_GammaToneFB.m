@@ -1,4 +1,4 @@
-function [ v ] = ACE_GammaToneFB( x, p )
+function [ v, fcoefs ] = ACE_GammaToneFB( x, p )
 %ACE_GAMMATONEFB
 %INPUT x: pre-emphasized audio
 %      p: modified MAP from pre-emphasis function
