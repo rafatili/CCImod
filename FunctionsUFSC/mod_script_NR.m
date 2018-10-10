@@ -36,4 +36,6 @@ v = sgnls.noise;
 tech = 'EnvEst'; %noise reduction technique: 'EnvEst', 'WF', 'BM','none'
 %% stimulate
 plotflag = 1; %plot electrodogram
-mod_stimulateGT_NR(y,x,v, handles.parameters, tech, plotflag); %use gammatone filters
+stimuli = mod_stimulateGT_NR(y,x,v, handles.parameters, tech, plotflag); %use gammatone filters
+
+Stream_2(stimuli);

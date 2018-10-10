@@ -1,0 +1,105 @@
+<a href="matlab: opentoline('/home/rafael/CCIMod/GUI/interface_rafael.mlapp',533,1)">533 </a>            app.checklistitem();
+app
+
+app = 
+
+  <a href="matlab:helpPopup interface_rafael" style="font-weight:bold">interface_rafael</a> with properties:
+
+                                                   UIFigure: [1x1 Figure]
+                                 ScenarioconfigurationPanel: [1x1 Panel]
+                                       noisetypeButtonGroup: [1x1 ButtonGroup]
+                                                     babble: [1x1 RadioButton]
+                                                       ICRA: [1x1 RadioButton]
+                                                   SSN_IEEE: [1x1 RadioButton]
+                                            GainButtonGroup: [1x1 ButtonGroup]
+                                                 MMSEButton: [1x1 RadioButton]
+                                               WienerButton: [1x1 RadioButton]
+                                           BinaryMaskButton: [1x1 RadioButton]
+                                          UnprocessedButton: [1x1 RadioButton]
+                 AdaptativeintelligibilitytestprotocolPanel: [1x1 Panel]
+                                AdaptativetestprogressPanel: [1x1 Panel]
+                                                   SNRLabel: [1x1 Label]
+                                                   valueSNR: [1x1 Label]
+                                         AudiosentenceLabel: [1x1 Label]
+                                                   sentence: [1x1 Label]
+                                     CicletwodownoneupLabel: [1x1 Label]
+                                                numberCicle: [1x1 Label]
+                                                NumberAudio: [1x1 Label]
+                                                 audioLabel: [1x1 Label]
+                                    DatarepresentationPanel: [1x1 Panel]
+                                  udioemexecuoTextAreaLabel: [1x1 Label]
+                                              fraseExecucao: [1x1 TextArea]
+                                  StatusdereproduoLampLabel: [1x1 Label]
+                                       StatusdereproduoLamp: [1x1 Lamp]
+    VerdeudioexecutandoVermelhoOuvintepronunciandoAzulLabel: [1x1 Label]
+                                                 p1Button_1: [1x1 StateButton]
+                                                 p1Button_2: [1x1 StateButton]
+                                                 p1Button_3: [1x1 StateButton]
+                                                 p1Button_4: [1x1 StateButton]
+                                                 p1Button_5: [1x1 StateButton]
+                                                 p1Button_6: [1x1 StateButton]
+                                                 p1Button_7: [1x1 StateButton]
+                                                 p1Button_8: [1x1 StateButton]
+                                                 p1Button_9: [1x1 StateButton]
+                                                      Panel: [1x1 Panel]
+                                     TotalwordscorrectLabel: [1x1 Label]
+                                           palavrasCorretas: [1x1 NumericEditField]
+                         NmerototaldepalavrasEditFieldLabel: [1x1 Label]
+                                              totalPalavras: [1x1 NumericEditField]
+                                                 NextButton: [1x1 StateButton]
+                                              ComputeButton: [1x1 Button]
+                                                p1Button_10: [1x1 StateButton]
+                                                p1Button_11: [1x1 StateButton]
+                                            repeatLastAudio: [1x1 StateButton]
+                                                  selectAll: [1x1 Button]
+                                                 selectNone: [1x1 Button]
+                                          ControlpanelPanel: [1x1 Panel]
+                                                StartButton: [1x1 StateButton]
+                                                 StopButton: [1x1 StateButton]
+                                                StateButton: [1x1 StateButton]
+                                             PanelChecklist: [1x1 Panel]
+                                          checklistOKButton: [1x1 StateButton]
+                                               CheckBoxTerm: [1x1 CheckBox]
+                                            CheckBoxExplain: [1x1 CheckBox]
+                                             CheckBoxVolume: [1x1 CheckBox]
+                                           CheckBoxScenario: [1x1 CheckBox]
+                                               CheckBoxLoad: [1x1 CheckBox]
+                                                     Panel2: [1x1 Panel]
+                                                  LabelKnob: [1x1 Label]
+                                                   KnobGain: [1x1 Knob]
+                                             ButtonPlayTest: [1x1 Button]
+
+app.GainButtonGroup
+
+ans = 
+
+  <a href="matlab:helpPopup matlab.ui.container.ButtonGroup" style="font-weight:bold">ButtonGroup</a> (NR Technique) with properties:
+
+                  Title: 'NR Technique'
+        BackgroundColor: [0.9400 0.9400 0.9400]
+         SelectedObject: [1x1 RadioButton]
+    SelectionChangedFcn: ''
+               Position: [5 10 226 108]
+                  Units: 'pixels'
+
+  Show <a href="matlab:if exist('ans', 'var'), matlab.graphics.internal.getForDisplay('ans', ans, 'matlab.ui.container.ButtonGroup'), else, matlab.graphics.internal.getForDisplay('ans'), end">all properties</a>
+
+app.GainButtonGroup.SelectedObject
+
+ans = 
+
+  <a href="matlab:helpPopup matlab.ui.control.RadioButton" style="font-weight:bold">RadioButton</a> (Unprocessed) with properties:
+
+       Value: 1
+        Text: 'Unprocessed'
+    Position: [11 5 134 15]
+
+  Show <a href="matlab:if exist('ans', 'var'), matlab.graphics.internal.getForDisplay('ans', ans, 'matlab.ui.control.RadioButton'), else, matlab.graphics.internal.getForDisplay('ans'), end">all properties</a>
+
+app.GainButtonGroup.SelectedObject.Text
+
+ans =
+
+Unprocessed
+
+if system_dependent('IsDebugMode')==1, dbquit; end

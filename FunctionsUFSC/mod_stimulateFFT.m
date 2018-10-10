@@ -1,4 +1,4 @@
-function mod_stimulateFFT( filename , map, plotflag )
+function stimuli = mod_stimulateFFT( filename , map, plotflag )
 
 %%  Call ACE processing routine
 if (isfield(map,'Left') ==1)
@@ -12,7 +12,7 @@ if (isfield(map,'Right') ==1)
     map.General.RightOn = 1; %indicates the desire to stimulate the right channel
     map.Right.lr_select = 'right'; %%% right - - - Process the right implant first
     audio_signal  = AudioSignal( filename, map.Right.lr_select );
-    stimuli.right = ufscACEprocessFFT(audio_signal,map.Right);
+    stimuli.right = ufscACEprocessFFT(audio_signal,map.Right, plotflag);
 end
 stimuli.map=map;
 
@@ -21,11 +21,5 @@ stimuli.map=map;
 % save (['stimuli_CCiMOBILE_', NAME], '-struct', 'stimuli');
 % saveas(gcf, ['Electrodogram_CCiMOBILE_', NAME], 'fig'); % Save figure
 
-%% Stream the stimulus to the CCI-Mobile Platform
-try
-    Stream (stimuli);
-catch
-    warning('Stream failled. Verify the board connection.')
-end
 
 return

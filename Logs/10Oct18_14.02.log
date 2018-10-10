@@ -1,0 +1,33 @@
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapL.m
+[Warning: Stream failled. Verify the board connection.] 
+<a href="matlab: opentoline('/home/rafael/CCIMod/GUI/interface_rafael.mlapp',631,1)">631 </a>            display(app.map.Left.Gain) %teste
+if system_dependent('IsDebugMode')==1, dbcont; end
+
+ans =
+
+    10
+
+[Warning: Stream failled. Verify the board connection.] 
+
+ans =
+
+   21.2369
+
+[Warning: Stream failled. Verify the board connection.] 
+
+ans =
+
+   29.4778
+
+[Warning: Stream failled. Verify the board connection.] 
+
+ans =
+
+   39.2462
+
+[Warning: Stream failled. Verify the board connection.] 
+
+ans =
+
+     0
+

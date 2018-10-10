@@ -1,0 +1,135 @@
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapL.m
+[Warning: Stream failled. Verify the board connection.] 
+                     ImplantType: 'CI24RE'
+               SamplingFrequency: 16000
+                NumberOfChannels: 22
+                        Strategy: 'ACE'
+                         Nmaxima: 8
+                 StimulationMode: 'MP1+2'
+                 StimulationRate: 1000
+                      PulseWidth: 25
+                             IPG: 8
+                     Sensitivity: 2.3000
+                            Gain: 25
+                          Volume: 10
+                               Q: 20
+                       BaseLevel: 0.0156
+                 SaturationLevel: 0.5859
+                ChannelOrderType: 'base-to-apex'
+                  FrequencyTable: 'Default'
+                          Window: 'Hanning'
+         El_CF1_CF2_THR_MCL_Gain: [22x6 double]
+                   NumberOfBands: 22
+                      Electrodes: [22x1 double]
+          LowerCutOffFrequencies: [22x1 double]
+          UpperCutOffFrequencies: [22x1 double]
+                             THR: [22x1 double]
+                             MCL: [22x1 double]
+                       BandGains: [22x1 double]
+                        Comments: ''
+    pulses_per_frame_per_channel: 8
+                pulses_per_frame: 64
+                      block_size: 128
+                          nvects: 8
+                   analysis_rate: 1000
+                     block_shift: 16
+                      total_rate: 8000
+                      pulseWidth: [25 0]
+                  pulsesPerFrame: [64 0]
+              interpulseDuration: 60
+                         ncycles: 600
+                       nRFcycles: [88 2]
+               ImplantGeneration: 'CIC4'
+             StimulationModeCode: 28
+                         sub_mag: -1.0000e-10
+                   channel_order: [22x1 double]
+                          ranges: [22x1 double]
+                     global_gain: 1
+                           NHIST: 112
+                        fft_size: 128
+                        num_bins: 65
+                        bin_freq: 125
+                       bin_freqs: [1x65 double]
+                          window: [128x1 double]
+                       band_bins: [22x1 double]
+                         weights: [22x65 double]
+                     power_gains: [22x1 double]
+                 crossover_freqs: [23x1 double]
+                     band_widths: [22x1 double]
+                      char_freqs: [22x1 double]
+                     sensitivity: 2.3000
+                    scale_factor: 7.0190e-05
+                        gains_dB: [22x1 double]
+                           gains: [22x1 double]
+                    volume_level: 1
+                    num_rejected: 14
+               lgf_dynamic_range: 31.4940
+                       lgf_alpha: 415.9948
+
+[Warning: Stream failled. Verify the board connection.] 
+                     ImplantType: 'CI24RE'
+               SamplingFrequency: 16000
+                NumberOfChannels: 22
+                        Strategy: 'ACE'
+                         Nmaxima: 8
+                 StimulationMode: 'MP1+2'
+                 StimulationRate: 1000
+                      PulseWidth: 25
+                             IPG: 8
+                     Sensitivity: 2.3000
+                            Gain: 4.5428
+                          Volume: 10
+                               Q: 20
+                       BaseLevel: 0.0156
+                 SaturationLevel: 0.5859
+                ChannelOrderType: 'base-to-apex'
+                  FrequencyTable: 'Default'
+                          Window: 'Hanning'
+         El_CF1_CF2_THR_MCL_Gain: [22x6 double]
+                   NumberOfBands: 22
+                      Electrodes: [22x1 double]
+          LowerCutOffFrequencies: [22x1 double]
+          UpperCutOffFrequencies: [22x1 double]
+                             THR: [22x1 double]
+                             MCL: [22x1 double]
+                       BandGains: [22x1 double]
+                        Comments: ''
+    pulses_per_frame_per_channel: 8
+                pulses_per_frame: 64
+                      block_size: 128
+                          nvects: 8
+                   analysis_rate: 1000
+                     block_shift: 16
+                      total_rate: 8000
+                      pulseWidth: [25 0]
+                  pulsesPerFrame: [64 0]
+              interpulseDuration: 60
+                         ncycles: 600
+                       nRFcycles: [88 2]
+               ImplantGeneration: 'CIC4'
+             StimulationModeCode: 28
+                         sub_mag: -1.0000e-10
+                   channel_order: [22x1 double]
+                          ranges: [22x1 double]
+                     global_gain: 1
+                           NHIST: 112
+                        fft_size: 128
+                        num_bins: 65
+                        bin_freq: 125
+                       bin_freqs: [1x65 double]
+                          window: [128x1 double]
+                       band_bins: [22x1 double]
+                         weights: [22x65 double]
+                     power_gains: [22x1 double]
+                 crossover_freqs: [23x1 double]
+                     band_widths: [22x1 double]
+                      char_freqs: [22x1 double]
+                     sensitivity: 2.3000
+                    scale_factor: 7.0190e-05
+                        gains_dB: [22x1 double]
+                           gains: [22x1 double]
+                    volume_level: 1
+                    num_rejected: 14
+               lgf_dynamic_range: 31.4940
+                       lgf_alpha: 415.9948
+

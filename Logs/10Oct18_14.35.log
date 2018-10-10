@@ -1,0 +1,59 @@
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapL.m
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('interface_rafael/runTestSentence', '/home/rafael/CCIMod/GUI/interface_rafael.mlapp', 202)" style="font-weight:bold">interface_rafael/runTestSentence</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/GUI/interface_rafael.mlapp',202,0)">line 202</a>)
+Undefined function 'sigproc' for input arguments of type 'char'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('interface_rafael/StartButtonValueChanged', '/home/rafael/CCIMod/GUI/interface_rafael.mlapp', 356)" style="font-weight:bold">interface_rafael/StartButtonValueChanged</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/GUI/interface_rafael.mlapp',356,0)">line 356</a>)
+            app.runTestSentence();
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('appdesigner.internal.service.AppManagementService/tryCallback', '/usr/local/MATLAB/R2016a/toolbox/matlab/appdesigner/appdesigner/+appdesigner/+internal/+service/AppManagementService.m', 179)" style="font-weight:bold">appdesigner.internal.service.AppManagementService/tryCallback</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2016a/toolbox/matlab/appdesigner/appdesigner/+appdesigner/+internal/+service/AppManagementService.m',179,0)">line 179</a>)
+                    callback(app);
+
+Error in
+<a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.apps.AppBase>@(source,event)tryCallback(appdesigner.internal.service.AppManagementService.instance(),app,callback,requiresEventData,event)')" style="font-weight:bold">matlab.apps.AppBase>@(source,event)tryCallback(appdesigner.internal.service.AppManagementService.instance(),app,callback,requiresEventData,event)</a>} 
+Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.ui.control.internal.controller.ComponentController/executeUserCallback', '/usr/local/MATLAB/R2016a/toolbox/matlab/uicomponents/uicomponents/+matlab/+ui/+control/+internal/+controller/ComponentController.m', 292)" style="font-weight:bold">matlab.ui.control.internal.controller.ComponentController/executeUserCallback</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2016a/toolbox/matlab/uicomponents/uicomponents/+matlab/+ui/+control/+internal/+controller/ComponentController.m',292,0)">line 292</a>)
+Error while evaluating StateButton PrivateValueChangedFcn
+
+mod_script_NR
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapL.m
+Speech file loaded is: /home/rafael/CCIMod/Sounds/S_01_09.wav
+[Warning: Stream failled. Verify the board connection.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Stream_2', '/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m', 8)" style="font-weight:bold">Stream_2</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m',8,0)">line 8</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mod_script_NR', '/home/rafael/CCIMod/FunctionsUFSC/mod_script_NR.m', 41)" style="font-weight:bold">mod_script_NR</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/mod_script_NR.m',41,0)">line 41</a>)] 
+mod_script
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapR.m
+
+p = 
+
+    General: [1x1 struct]
+      Right: [1x1 struct]
+
+[Warning: Stream failled. Verify the board connection.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Stream_2', '/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m', 8)" style="font-weight:bold">Stream_2</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m',8,0)">line 8</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mod_script', '/home/rafael/CCIMod/FunctionsUFSC/mod_script.m', 10)" style="font-weight:bold">mod_script</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/mod_script.m',10,0)">line 10</a>)] 
+mod_script
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapR.m
+
+p = 
+
+    General: [1x1 struct]
+      Right: [1x1 struct]
+
+[Warning: Stream failled. Verify the board connection.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Stream_2', '/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m', 8)" style="font-weight:bold">Stream_2</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m',8,0)">line 8</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mod_script', '/home/rafael/CCIMod/FunctionsUFSC/mod_script.m', 10)" style="font-weight:bold">mod_script</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/mod_script.m',10,0)">line 10</a>)] 
+mod_script
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapL.m
+[Warning: Stream failled. Verify the board connection.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Stream_2', '/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m', 8)" style="font-weight:bold">Stream_2</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m',8,0)">line 8</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mod_script', '/home/rafael/CCIMod/FunctionsUFSC/mod_script.m', 10)" style="font-weight:bold">mod_script</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/mod_script.m',10,0)">line 10</a>)] 
+mod_script
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapR.m
+
+p = 
+
+    General: [1x1 struct]
+      Right: [1x1 struct]
+
+[Warning: Stream failled. Verify the board connection.] 
+[> In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Stream_2', '/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m', 8)" style="font-weight:bold">Stream_2</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/Stream_2.m',8,0)">line 8</a>)
+  In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mod_script', '/home/rafael/CCIMod/FunctionsUFSC/mod_script.m', 10)" style="font-weight:bold">mod_script</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/mod_script.m',10,0)">line 10</a>)] 
