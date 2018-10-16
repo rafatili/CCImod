@@ -1,0 +1,25 @@
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapR.m
+
+p = 
+
+    General: [1x1 struct]
+      Right: [1x1 struct]
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mod_stimulateGT_NR', '/home/rafael/CCIMod/FunctionsUFSC/mod_stimulateGT_NR.m', 22)" style="font-weight:bold">mod_stimulateGT_NR</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/mod_stimulateGT_NR.m',22,0)">line 22</a>)
+Reference to non-existent field 'Left'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('interface_rafael/runTestSentence', '/home/rafael/CCIMod/GUI/interface_rafael.mlapp', 217)" style="font-weight:bold">interface_rafael/runTestSentence</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/GUI/interface_rafael.mlapp',217,0)">line 217</a>)
+            app.stimuli = mod_stimulateGT_NR(y,x,v, app.map, tech, app.plotFlag.Value); %use gammatone filters
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('interface_rafael/StartButtonValueChanged', '/home/rafael/CCIMod/GUI/interface_rafael.mlapp', 376)" style="font-weight:bold">interface_rafael/StartButtonValueChanged</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/GUI/interface_rafael.mlapp',376,0)">line 376</a>)
+            app.runTestSentence();
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('appdesigner.internal.service.AppManagementService/tryCallback', '/usr/local/MATLAB/R2016a/toolbox/matlab/appdesigner/appdesigner/+appdesigner/+internal/+service/AppManagementService.m', 179)" style="font-weight:bold">appdesigner.internal.service.AppManagementService/tryCallback</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2016a/toolbox/matlab/appdesigner/appdesigner/+appdesigner/+internal/+service/AppManagementService.m',179,0)">line 179</a>)
+                    callback(app);
+
+Error in
+<a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.apps.AppBase>@(source,event)tryCallback(appdesigner.internal.service.AppManagementService.instance(),app,callback,requiresEventData,event)')" style="font-weight:bold">matlab.apps.AppBase>@(source,event)tryCallback(appdesigner.internal.service.AppManagementService.instance(),app,callback,requiresEventData,event)</a>} 
+Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.ui.control.internal.controller.ComponentController/executeUserCallback', '/usr/local/MATLAB/R2016a/toolbox/matlab/uicomponents/uicomponents/+matlab/+ui/+control/+internal/+controller/ComponentController.m', 292)" style="font-weight:bold">matlab.ui.control.internal.controller.ComponentController/executeUserCallback</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2016a/toolbox/matlab/uicomponents/uicomponents/+matlab/+ui/+control/+internal/+controller/ComponentController.m',292,0)">line 292</a>)
+Error while evaluating StateButton PrivateValueChangedFcn
+
+opentoline('/home/rafael/CCIMod/FunctionsUFSC/mod_stimulateGT_NR.m',22,0)

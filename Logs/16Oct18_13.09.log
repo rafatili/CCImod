@@ -1,0 +1,62 @@
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMapR.m
+
+p = 
+
+    General: [1x1 struct]
+      Right: [1x1 struct]
+
+[Warning: Stream failled. Verify the board connection.] 
+     7
+
+[Warning: Stream failled. Verify the board connection.] 
+     2
+
+[Warning: Stream failled. Verify the board connection.] 
+     4
+
+[Warning: Stream failled. Verify the board connection.] 
+     1
+
+[Warning: Stream failled. Verify the board connection.] 
+     5
+
+[Warning: Stream failled. Verify the board connection.] 
+     0
+
+[Warning: Stream failled. Verify the board connection.] 
+     4
+
+[Warning: Stream failled. Verify the board connection.] 
+     1
+
+[Warning: Stream failled. Verify the board connection.] 
+     1
+
+[Warning: Stream failled. Verify the board connection.] 
+     5
+
+[Warning: Stream failled. Verify the board connection.] 
+     0
+
+[Warning: Stream failled. Verify the board connection.] 
+     4
+
+[Warning: Stream failled. Verify the board connection.] 
+mod(2,2)
+
+ans =
+
+     0
+
+mod(3,2)
+
+ans =
+
+     1
+
+mod(5,2)
+
+ans =
+
+     1
+

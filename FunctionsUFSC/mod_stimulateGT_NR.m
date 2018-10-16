@@ -19,7 +19,7 @@ end
 if (isfield(map,'Right') ==1)
     map.General.RightOn = 1; %indicates the desire to stimulate the right channel
     map.Right.lr_select = 'right'; %%% right - - - Process the right implant first
-    NRgains = NR_calc(speech, noise, map.Left, tech);
+    NRgains = NR_calc(speech, noise, map.Right, tech);
     stimuli.right = ufscACEprocessGT_NR(mix, map.Right, NRgains, plotflag);
 end
 stimuli.map=map;

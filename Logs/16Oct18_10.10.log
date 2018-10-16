@@ -1,0 +1,28 @@
+Map file loaded is: /home/rafael/CCIMod/MAPs/SampleMap.m
+
+p = 
+
+    General: [1x1 struct]
+       Left: [1x1 struct]
+      Right: [1x1 struct]
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('movegui', '/usr/local/MATLAB/R2016a/toolbox/matlab/uitools/movegui.m', 91)" style="font-weight:bold">movegui</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2016a/toolbox/matlab/uitools/movegui.m',91,0)">line 91</a>)
+unrecognized position
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('ufscACEprocessGT', '/home/rafael/CCIMod/FunctionsUFSC/ufscACEprocessGT.m', 26)" style="font-weight:bold">ufscACEprocessGT</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/ufscACEprocessGT.m',26,0)">line 26</a>)
+        movegui(u.h_figure, pos)
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('mod_stimulateGT', '/home/rafael/CCIMod/FunctionsUFSC/mod_stimulateGT.m', 15)" style="font-weight:bold">mod_stimulateGT</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/FunctionsUFSC/mod_stimulateGT.m',15,0)">line 15</a>)
+    stimuli.right = ufscACEprocessGT(audio_signal,map.Right, plotflag);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('interface_rafael/runTrainningSentence', '/home/rafael/CCIMod/GUI/interface_rafael.mlapp', 653)" style="font-weight:bold">interface_rafael/runTrainningSentence</a> (<a href="matlab: opentoline('/home/rafael/CCIMod/GUI/interface_rafael.mlapp',653,0)">line 653</a>)
+            app.stimuli = mod_stimulateGT( speechFile , app.map, plotflag );
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('appdesigner.internal.service.AppManagementService/tryCallback', '/usr/local/MATLAB/R2016a/toolbox/matlab/appdesigner/appdesigner/+appdesigner/+internal/+service/AppManagementService.m', 179)" style="font-weight:bold">appdesigner.internal.service.AppManagementService/tryCallback</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2016a/toolbox/matlab/appdesigner/appdesigner/+appdesigner/+internal/+service/AppManagementService.m',179,0)">line 179</a>)
+                    callback(app);
+
+Error in
+<a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.apps.AppBase>@(source,event)tryCallback(appdesigner.internal.service.AppManagementService.instance(),app,callback,requiresEventData,event)')" style="font-weight:bold">matlab.apps.AppBase>@(source,event)tryCallback(appdesigner.internal.service.AppManagementService.instance(),app,callback,requiresEventData,event)</a>} 
+Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.ui.control.internal.controller.ComponentController/executeUserCallback', '/usr/local/MATLAB/R2016a/toolbox/matlab/uicomponents/uicomponents/+matlab/+ui/+control/+internal/+controller/ComponentController.m', 249)" style="font-weight:bold">matlab.ui.control.internal.controller.ComponentController/executeUserCallback</a> (<a href="matlab: opentoline('/usr/local/MATLAB/R2016a/toolbox/matlab/uicomponents/uicomponents/+matlab/+ui/+control/+internal/+controller/ComponentController.m',249,0)">line 249</a>)
+Error while evaluating Button PrivateButtonPushedFcn
+
