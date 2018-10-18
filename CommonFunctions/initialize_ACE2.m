@@ -1,4 +1,4 @@
-function p = initialize_ACE()
+function p = initialize_ACE2(mapFile)
 %   Initialization of ACE parameters from subject's MAP
 %   Processing parameters are derived from subject's Left and Right maps
 
@@ -6,7 +6,7 @@ function p = initialize_ACE()
 global fs; fs = 16000;
 
 % load map
-p = load_map; %load map parameters
+p = load_map2(mapFile); %load map parameters
 
 p.General.block_size = 128;
 p.General.frameDuration = 8;
