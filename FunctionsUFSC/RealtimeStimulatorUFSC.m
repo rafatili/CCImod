@@ -1,4 +1,4 @@
-function varargout = RealtimeStimulator(varargin)
+function varargout = RealtimeStimulatorUFSC(varargin)
 % RealtimeStimulator
 % GUI to processes audio from the BTE in realtime
 % Processed stimuli is sent to the RF coils via USB/UART
@@ -33,14 +33,14 @@ function varargout = RealtimeStimulator(varargin)
 
 % Edit the above text to modify the response to help RealtimeStimulator
 
-% Last Modified by GUIDE v2.5 03-Oct-2016 20:03:48
+% Last Modified by GUIDE v2.5 19-Oct-2018 12:54:11
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
     'gui_Singleton',  gui_Singleton, ...
-    'gui_OpeningFcn', @RealtimeStimulator_OpeningFcn, ...
-    'gui_OutputFcn',  @RealtimeStimulator_OutputFcn, ...
+    'gui_OpeningFcn', @RealtimeStimulatorUFSC_OpeningFcn, ...
+    'gui_OutputFcn',  @RealtimeStimulatorUFSC_OutputFcn, ...
     'gui_LayoutFcn',  [] , ...
     'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -56,7 +56,7 @@ end
 
 
 % --- Executes just before RealtimeStimulator is made visible.
-function RealtimeStimulator_OpeningFcn(hObject, eventdata, handles, varargin)
+function RealtimeStimulatorUFSC_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -68,7 +68,14 @@ handles.output = hObject;
 global fs; fs = 16000;
 
 %% GET p FROM THE OTHER APP
-p = initialize_ACE_integer_ppf;
+fname = fullfile('GUI','map.mat');
+if exist(fname,'file') 
+    z = load(fname);
+    p = z.p;
+    clear z;
+else
+    p = initialize_ACE_integer_ppf;
+end
 handles.parameters = p;
 handles.stop = 0;
 
@@ -85,7 +92,7 @@ else
     p.General.LeftOn = 0; handles.parameters.General.LeftOn = 0;
     set(handles.slider_sensitivity_left,'Enable','off' );
     set(handles.slider_gain_left,'Enable','off');
-    set(handles.slider_volume_right,'Enable','off');
+    set(handles.slider_volume_left,'Enable','off');
     set(handles.text_sens_left, 'Enable','off');
     set(handles.text_gain_left, 'Enable','off');
     set(handles.text_vol_left, 'Enable','off');
@@ -119,7 +126,7 @@ guidata(hObject, handles);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = RealtimeStimulator_OutputFcn(hObject, eventdata, handles)
+function varargout = RealtimeStimulatorUFSC_OutputFcn(hObject, eventdata, handles)
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -374,117 +381,146 @@ handles.stop = 1;
 guidata(hObject, handles);
 
 % --- Executes on button press in button_start.
+function button_start_code(hObject, eventdata, handles)
+% hObject    handle to button_start (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+handles.button_start.Enable = 'off';
+handles.button_stop.Enable = 'on';
+try
+    % Initialize
+    p = handles.parameters;
+    s = initializeBoard(p);
+    outputBuffer = create_output_buffer(p);
+    
+    if (isfield(p,'Left') ==1)
+        sine_token_l=uint8(175.*sin(2.*pi.*(0:1:p.Left.pulses_per_frame).*0.01)); %figure; plot(sine_token);
+        indL = 1;
+        bufferHistory_left = (zeros(1, p.Left.block_size - p.Left.block_shift));
+    end
+    
+    if (isfield(p,'Right') ==1)
+        sine_token_r=uint8(175.*sin(2.*pi.*(0:1:p.Right.pulses_per_frame).*0.01)); %figure; plot(sine_token);
+        indR = 1;
+        bufferHistory_right = (zeros(1, p.Right.block_size - p.Right.block_shift));
+    end
+    handles.stop = 0; guidata(hObject, handles);
+    
+    %clear stimulation buffers by sending null frames
+    frame_no=1;
+    while frame_no<3 % send at least 2 null frames to clear out memory
+        if Wait(s)>= 512
+            AD_data_bytes = Read(s, 512);
+            outputBuffer(133:248) = uint8(0); %zero out left amplitudes, if not active
+            outputBuffer(391:506) = uint8(0); %zero out right amplitudes
+            Write(s, outputBuffer,516); % Write output to the board
+            frame_no = frame_no+1;
+        end
+        
+    end
+    
+    while handles.stop==0 % use while else timing won't be right
+        drawnow; handles = guidata(hObject); p = handles.parameters;
+        
+        if Wait(s)>= 512
+            AD_data_bytes = Read(s, 512);                       % Read audio from BTE
+            AD_data=typecast(int8(AD_data_bytes), 'int16');     % Type cast to short 16 bits
+            
+            if (p.General.LeftOn == 1)
+                audio_left = double(AD_data(1:2:end));          % Type cast to double for processing
+                audio_left =  (p.Left.scale_factor).*audio_left; %2.3/32768 at 25 dB gain or 1/32768 at 33dB gain for 1kHz at 65dB SPl to equate to MCL p.sensitivity.
+                stimuli.left = ACE_Processing_Realtime(audio_left, bufferHistory_left, p.Left);
+                a=7;
+                %for (i=1:p.Left.pulses_per_frame)
+                for (i=1:numel(stimuli.left.electrodes))
+                    outputBuffer(a) = uint8(stimuli.left.electrodes(i)); a=a+1; %left electrodes
+                end
+                a= 133;
+                %for (i=1:p.Left.pulses_per_frame)
+                for (i=1:numel(stimuli.left.electrodes))
+                    outputBuffer(a) = uint8(stimuli.left.current_levels(i)); a=a+1; %left amplitudes
+                end
+                bufferHistory_left = audio_left(p.Left.block_size-p.Left.NHIST+1:end);
+            else
+                %a= 133;
+                outputBuffer(133:248) = uint8(0); %zero out left amplitudes, if not active
+            end
+            
+            if (p.General.RightOn == 1)
+                audio_right=double(AD_data(2:2:end));
+                audio_right = (p.Right.scale_factor).*audio_right;
+                stimuli.right = ACE_Processing_Realtime(audio_right, bufferHistory_right, p.Right);
+                a=265;
+                %for (i=1:p.Right.pulses_per_frame)
+                for (i=1:numel(stimuli.right.electrodes))
+                    outputBuffer(a) =uint8(stimuli.right.electrodes(i)); a=a+1; %right electrodes
+                end
+                a=391;
+                for (i=1:numel(stimuli.right.electrodes))
+                    %for (i=1:p.Right.pulses_per_frame)
+                    outputBuffer(a) = uint8(stimuli.right.current_levels(i)); a=a+1; %right amplitudes
+                end
+                bufferHistory_right = audio_right(p.Right.block_size-p.Right.NHIST+1:end);
+            else
+                %a=391;
+                outputBuffer(391:506) = uint8(0); %zero out right amplitudes
+            end
+            Write(s, outputBuffer,516); % Write the BTE processed stimuli to the coil
+            
+            % USE FOLLOWING COMMENTED SECTION ONLY FOR TESTING WITH OSCILLOSCOPE
+            % Comment the above line: Write(s, outputBuffer,516);
+            % and uncomment the following section
+            % This will write sine stimuli to the RF coil which can be
+            % checked on the oscilloscope for timing verification.
+            
+            %             for j=1:p.Left.pulses_per_frame/p.Left.Nmaxima;
+            %                 stim.l(j)= sine_token_l(indL);
+            %                 indL=indL+1;
+            %                 if indL==length(sine_token_l)+1
+            %                     indL=1;
+            %                 end
+            %             end
+            %
+            %             for j=1:p.Right.pulses_per_frame/p.Right.Nmaxima;
+            %                 stim.r(j)= 200; %sine_token_l(indL);
+            %                 indR=indR+1;
+            %                 if indR==length(sine_token_r)+1
+            %                     indR=1;
+            %                 end
+            %             end
+            %             stimulus = UART_output_buffer(stim, p);
+            %             Write(s, stimulus,516);
+            
+            clear AD_data_bytes; clear AD_data;
+        end
+        
+    end % end while loop, until stop button is pressed
+    
+    delete(s); clear s;
+    
+catch
+    warning('Stream failled. Verify the board connection.')
+    %pause(3)   %for testing only
+end
+handles.button_start.Enable = 'on';
+handles.button_stop.Enable = 'off';
+
+
+% --- Executes when user attempts to close figure1.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+p = handles.parameters;
+fname = fullfile('GUI','map.mat');
+save(fname, 'p');
+% Hint: delete(hObject) closes the figure
+delete(hObject);
+
+
+% --- Executes on button press in button_start.
 function button_start_Callback(hObject, eventdata, handles)
 % hObject    handle to button_start (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
-% Initialize
-p = handles.parameters;
-s = initializeBoard(p);
-outputBuffer = create_output_buffer(p);
-
-if (isfield(p,'Left') ==1)
-    sine_token_l=uint8(175.*sin(2.*pi.*(0:1:p.Left.pulses_per_frame).*0.01)); %figure; plot(sine_token);
-    indL = 1;
-    bufferHistory_left = (zeros(1, p.Left.block_size - p.Left.block_shift));
-end
-
-if (isfield(p,'Right') ==1)
-    sine_token_r=uint8(175.*sin(2.*pi.*(0:1:p.Right.pulses_per_frame).*0.01)); %figure; plot(sine_token);
-    indR = 1;
-    bufferHistory_right = (zeros(1, p.Right.block_size - p.Right.block_shift));
-end
-handles.stop = 0; guidata(hObject, handles);
-
-%clear stimulation buffers by sending null frames
-frame_no=1;
-while frame_no<3 % send at least 2 null frames to clear out memory
-    if Wait(s)>= 512
-        AD_data_bytes = Read(s, 512);
-        outputBuffer(133:248) = uint8(0); %zero out left amplitudes, if not active
-        outputBuffer(391:506) = uint8(0); %zero out right amplitudes
-        Write(s, outputBuffer,516); % Write output to the board
-        frame_no = frame_no+1;
-    end
-    
-end
-
-while handles.stop==0 % use while else timing won't be right
-    drawnow; handles = guidata(hObject); p = handles.parameters;
-
-    if Wait(s)>= 512
-        AD_data_bytes = Read(s, 512);                       % Read audio from BTE
-        AD_data=typecast(int8(AD_data_bytes), 'int16');     % Type cast to short 16 bits
-        
-        if (p.General.LeftOn == 1)
-            audio_left = double(AD_data(1:2:end));          % Type cast to double for processing
-            audio_left =  (p.Left.scale_factor).*audio_left; %2.3/32768 at 25 dB gain or 1/32768 at 33dB gain for 1kHz at 65dB SPl to equate to MCL p.sensitivity.
-            stimuli.left = ACE_Processing_Realtime(audio_left, bufferHistory_left, p.Left);
-            a=7;
-            %for (i=1:p.Left.pulses_per_frame)
-            for (i=1:numel(stimuli.left.electrodes))
-                outputBuffer(a) = uint8(stimuli.left.electrodes(i)); a=a+1; %left electrodes
-            end
-            a= 133;
-            %for (i=1:p.Left.pulses_per_frame)
-            for (i=1:numel(stimuli.left.electrodes))
-                outputBuffer(a) = uint8(stimuli.left.current_levels(i)); a=a+1; %left amplitudes
-            end
-            bufferHistory_left = audio_left(p.Left.block_size-p.Left.NHIST+1:end);
-        else
-            %a= 133;
-            outputBuffer(133:248) = uint8(0); %zero out left amplitudes, if not active
-        end
-        
-        if (p.General.RightOn == 1)
-            audio_right=double(AD_data(2:2:end));
-            audio_right = (p.Right.scale_factor).*audio_right;
-            stimuli.right = ACE_Processing_Realtime(audio_right, bufferHistory_right, p.Right);
-            a=265;
-            %for (i=1:p.Right.pulses_per_frame)
-            for (i=1:numel(stimuli.right.electrodes))
-                outputBuffer(a) =uint8(stimuli.right.electrodes(i)); a=a+1; %right electrodes
-            end
-            a=391;
-            for (i=1:numel(stimuli.right.electrodes))
-                %for (i=1:p.Right.pulses_per_frame)
-                outputBuffer(a) = uint8(stimuli.right.current_levels(i)); a=a+1; %right amplitudes
-            end
-            bufferHistory_right = audio_right(p.Right.block_size-p.Right.NHIST+1:end);
-        else
-            %a=391;
-            outputBuffer(391:506) = uint8(0); %zero out right amplitudes
-        end
-        Write(s, outputBuffer,516); % Write the BTE processed stimuli to the coil
-        
-        % USE FOLLOWING COMMENTED SECTION ONLY FOR TESTING WITH OSCILLOSCOPE
-        % Comment the above line: Write(s, outputBuffer,516);
-        % and uncomment the following section
-        % This will write sine stimuli to the RF coil which can be
-        % checked on the oscilloscope for timing verification.
-
-%             for j=1:p.Left.pulses_per_frame/p.Left.Nmaxima;
-%                 stim.l(j)= sine_token_l(indL);
-%                 indL=indL+1;
-%                 if indL==length(sine_token_l)+1
-%                     indL=1;
-%                 end
-%             end
-%             
-%             for j=1:p.Right.pulses_per_frame/p.Right.Nmaxima;
-%                 stim.r(j)= 200; %sine_token_l(indL);
-%                 indR=indR+1;
-%                 if indR==length(sine_token_r)+1
-%                     indR=1;
-%                 end
-%             end
-%             stimulus = UART_output_buffer(stim, p);
-%             Write(s, stimulus,516);
-
-        clear AD_data_bytes; clear AD_data;
-    end
-    
-end % end while loop, until stop button is pressed
-
-delete(s); clear s;
+button_start_code(hObject, eventdata, handles);
