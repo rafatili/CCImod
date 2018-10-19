@@ -73,8 +73,10 @@ if exist(fname,'file')
     z = load(fname);
     p = z.p;
     clear z;
+    handles.flagMapLoaded = 0;
 else
     p = initialize_ACE_integer_ppf;
+    handles.flagMapLoaded = 1;
 end
 handles.parameters = p;
 handles.stop = 0;
@@ -83,7 +85,7 @@ if (isfield(p,'Left')==1)
     p.General.LeftOn = 1; handles.parameters.General.LeftOn = 1;
     set(handles.slider_sensitivity_left,'Value', p.Left.Sensitivity );
     set(handles.slider_gain_left,'Value', p.Left.Gain);
-    set(handles.slider_volume_right,'Value', p.Left.Volume);
+    set(handles.slider_volume_left,'Value', p.Left.Volume);
     set(handles.text_sens_left, 'String', ['Sensitivity = ' num2str(p.Left.Sensitivity)]);
     set(handles.text_gain_left, 'String', ['Gain = ' num2str( p.Left.Gain) 'dB']);
     set(handles.text_vol_left, 'String', ['Volume = ' num2str(p.Left.Volume)]);
@@ -511,9 +513,11 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 % hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-p = handles.parameters;
-fname = fullfile('GUI','map.mat');
-save(fname, 'p');
+if handles.flagMapLoaded == 0;
+    p = handles.parameters;
+    fname = fullfile('GUI','map.mat');
+    save(fname, 'p');
+end
 % Hint: delete(hObject) closes the figure
 delete(hObject);
 
