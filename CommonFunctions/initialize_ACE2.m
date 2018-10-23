@@ -1,4 +1,4 @@
-function p = initialize_ACE_integer_ppf()
+function p = initialize_ACE2(mapFile)
 %   Initialization of ACE parameters from subject's MAP
 %   Processing parameters are derived from subject's Left and Right maps
 
@@ -6,7 +6,7 @@ function p = initialize_ACE_integer_ppf()
 global fs; fs = 16000;
 
 % load map
-p = load_map; %load map parameters
+p = load_map2(mapFile); %load map parameters
 
 p.General.block_size = 128;
 p.General.frameDuration = 8;
@@ -28,21 +28,18 @@ if (isfield(p,'Left')==1)
     p.Left.analysis_rate = p.Left.StimulationRate;
     p.Left.block_shift	= ceil(fs / p.Left.analysis_rate);
     %p.Left.block_shift = ceil(p.General.block_size/p.Left.pulses_per_frame_per_channel);
-    p.Left.analysis_rate=(fs/p.Left.block_shift);
-    %p.Left.StimulationRate = p.Left.analysis_rate;
-    %p.Left.total_rate = p.Left.analysis_rate*p.Left.Nmaxima;
-    
-    p.Left.pulses_per_frame_per_channel=floor((8.0*p.Left.analysis_rate)/1000); %floor(0.5+floor((8.0*rate_set)/1000));
-    p.Left.pulses_per_frame= (p.Left.Nmaxima*p.Left.pulses_per_frame_per_channel);
-    
-    p.Left.StimulationRate = (p.Left.pulses_per_frame*1000)/(8*p.Left.Nmaxima);
+    p.Left.analysis_rate=round(fs/p.Left.block_shift);
+    p.Left.StimulationRate = p.Left.analysis_rate;
     p.Left.total_rate = p.Left.analysis_rate*p.Left.Nmaxima;
+    
+    p.Left.pulses_per_frame_per_channel=((8.0*p.Left.analysis_rate)/1000); %floor(0.5+floor((8.0*rate_set)/1000));
+    p.Left.pulses_per_frame= floor(p.Left.Nmaxima*p.Left.pulses_per_frame_per_channel);
     
     pwL = uint16(p.Left.PulseWidth); p.Left.pulseWidth= typecast(pwL,'uint8');
     ppfL = uint16(p.Left.pulses_per_frame); p.Left.pulsesPerFrame = typecast(ppfL,'uint8');
     
-    p.Left.interpulseDuration = p.General.frameDuration*1000/(p.Left.pulses_per_frame) - 2*p.Left.PulseWidth - p.Left.IPG - p.General.durationSYNC - p.General.additionalGap;
-    %p.Left.interpulseDuration = (1e6/p.Left.total_rate) - 2*p.Left.PulseWidth - p.Left.IPG - p.General.durationSYNC - p.General.additionalGap;
+    %p.Left.interpulseDuration = p.General.frameDuration*1000/(p.Left.pulses_per_frame) - 2*p.Left.PulseWidth - p.Left.IPG - p.General.durationSYNC - p.General.additionalGap;
+    p.Left.interpulseDuration = (1e6/p.Left.total_rate) - 2*p.Left.PulseWidth - p.Left.IPG - p.General.durationSYNC - p.General.additionalGap;
     
     p.Left.ncycles = uint16((p.Left.interpulseDuration/0.1));%uint16((p.Left.interpulseDuration/0.1) + 0.5);
     p.Left.nRFcycles= typecast(p.Left.ncycles,'uint8');
@@ -186,22 +183,19 @@ if (isfield(p,'Right')==1)
     p.Right.analysis_rate = p.Right.StimulationRate;
     p.Right.block_shift = ceil(fs/p.Right.StimulationRate);
     %p.Right.block_shift = ceil(p.General.block_size/p.Right.pulses_per_frame_per_channel);
-    p.Right.analysis_rate=(fs/p.Right.block_shift);
-    %p.Right.StimulationRate = p.Right.analysis_rate;
-    %p.Right.total_rate = p.Right.analysis_rate*p.Right.Nmaxima;
-
-    p.Right.pulses_per_frame_per_channel=floor((8.0*p.Right.analysis_rate)/1000); %floor(0.5+floor((8.0*rate_set)/1000));
-    p.Right.pulses_per_frame= (p.Right.Nmaxima*p.Right.pulses_per_frame_per_channel);
-    
-    p.Right.StimulationRate = (p.Right.pulses_per_frame*1000)/(8*p.Right.Nmaxima);
+    p.Right.analysis_rate=round(fs/p.Right.block_shift);
+    p.Right.StimulationRate = p.Right.analysis_rate;
     p.Right.total_rate = p.Right.analysis_rate*p.Right.Nmaxima;
+
+    p.Right.pulses_per_frame_per_channel=((8.0*p.Right.analysis_rate)/1000); %floor(0.5+floor((8.0*rate_set)/1000));
+    p.Right.pulses_per_frame= floor(p.Right.Nmaxima*p.Right.pulses_per_frame_per_channel);
     
     pwR = uint16(p.Right.PulseWidth); p.Right.pulseWidth= typecast(pwR,'uint8');
     ppfR = uint16(p.Right.pulses_per_frame); p.Right.pulsesPerFrame = typecast(ppfR,'uint8');
     
     % timing
-    p.Right.interpulseDuration = p.General.frameDuration*1000/(p.Right.pulses_per_frame) - 2*p.Right.PulseWidth - p.Right.IPG - p.General.durationSYNC - p.General.additionalGap;
-    %p.Right.interpulseDuration = (1e6/p.Right.total_rate) - 2*p.Right.PulseWidth - p.Right.IPG - p.General.durationSYNC - p.General.additionalGap;
+    %p.Right.interpulseDuration = p.General.frameDuration*1000/(p.Right.pulses_per_frame) - 2*p.Right.PulseWidth - p.Right.IPG - p.General.durationSYNC - p.General.additionalGap;
+    p.Right.interpulseDuration = (1e6/p.Right.total_rate) - 2*p.Right.PulseWidth - p.Right.IPG - p.General.durationSYNC - p.General.additionalGap;
     p.Right.ncycles = uint16((p.Right.interpulseDuration/0.1)); %uint16((p.Right.interpulseDuration/0.1) + 0.5);
     p.Right.nRFcycles= typecast(p.Right.ncycles,'uint8');
     

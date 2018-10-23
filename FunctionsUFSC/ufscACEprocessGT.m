@@ -17,7 +17,13 @@ if ~isempty(varargin)
         %% Plot Electrodogram
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         q.electrodes(q.is_idle) = 0;
-        plot_electrodogram(q,['Electrodogram: ' p.lr_select ' ear']);
+        u=plot_electrodogram(q,['Electrodogram: ' p.lr_select ' ear']);
+        if strcmp(p.lr_select,'left');
+            pos = 'northeast';
+        else
+            pos = 'southeast';
+        end
+        movegui(u.h_figure, pos)
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         if length(varargin) > 1
             warning('first argument is used as a flag for plotting the electrodogram. All other arguments are ignored');

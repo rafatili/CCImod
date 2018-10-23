@@ -251,7 +251,7 @@ if (isfield(p,'Right')==1)
     p.Right.global_gain = 1; %25; %60 %68
     p.Right.NHIST = p.Right.block_size-p.Right.block_shift;
     
-    p.Right.fft_size = p.General.fft_size
+    p.Right.fft_size = p.General.fft_size;
     p.Right.num_bins = p.General.num_bins;
     p.Right.bin_freq = p.General.bin_freq;
     p.Right.bin_freqs = p.General.bin_freqs;

@@ -12,11 +12,11 @@ fpath = mfilename('fullpath'); % full path of the current function file
 
 cd(fullfile(pathstr,'Sounds'))
 [speech_filename, speech_pathname] = uigetfile('*.wav', 'Select a speech file');
-if isequal(map_filename,0)
+if isequal(speech_filename,0)
     disp('No valid file selected, so file S_01_01.wav is loaded ')
     speechfile = 'S_01_01.wav';
 else
-    disp(['Speech file loaded is: ', fullfile(map_pathname, map_filename)])
+    disp(['Speech file loaded is: ', fullfile(speech_pathname, speech_filename)])
     speechfile = speech_filename;
 end
 
@@ -36,4 +36,6 @@ v = sgnls.noise;
 tech = 'EnvEst'; %noise reduction technique: 'EnvEst', 'WF', 'BM','none'
 %% stimulate
 plotflag = 1; %plot electrodogram
-mod_stimulateGT_NR(y,x,v, handles.parameters, tech, plotflag); %use gammatone filters
+stimuli = mod_stimulateGT_NR(y,x,v, handles.parameters, tech, plotflag); %use gammatone filters
+
+Stream_2(stimuli);

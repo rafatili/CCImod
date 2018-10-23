@@ -135,12 +135,13 @@ classdef SignalY < handle
             end
             %% mix at SNR
             [obj.PrvtSmix, obj.Prvttarget, obj.Prvtnoise]=s_and_n(obj.target, obj.noise, obj.SNRdB);
-            maxim=max(abs(obj.PrvtSmix));
-            if maxim>1
-                obj.PrvtSmix=obj.PrvtSmix/maxim;
-                obj.Prvtnoise=obj.Prvtnoise/maxim;
-                obj.Prvttarget=obj.Prvttarget/maxim;
-            end
+%%%%%%%%%%%% normalization is off so that the speech level is always the same            
+%             maxim=max(abs(obj.PrvtSmix));
+%             if maxim>1
+%                 obj.PrvtSmix=obj.PrvtSmix/maxim;
+%                 obj.Prvtnoise=obj.Prvtnoise/maxim;
+%                 obj.Prvttarget=obj.Prvttarget/maxim;
+%             end
         end
         
         function [srmr0,intel0] = intelsrmr(obj)
