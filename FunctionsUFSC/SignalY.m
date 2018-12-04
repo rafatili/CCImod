@@ -89,6 +89,10 @@ classdef SignalY < handle
         function ldTarget(obj)
             path = fullfile(obj.DB_dir,obj.speech_dir,obj.Xfile);
             [S, Fsmpl]=audioread(path);    %loads signal
+            [~,c] = size(S);
+            if c>1  % if wav is stereo, take only the first column
+                S = S(:,1);
+            end
             S=S-mean(S);
             if Fsmpl ~= obj.fs;
                 obj.Prvttarget=resample(S,obj.fs,Fsmpl);
