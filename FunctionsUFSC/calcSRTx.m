@@ -21,8 +21,8 @@ for ii = 1:L
     mean_idx(ii) = (even_idx(ii) + odd_idx(ii))/2;
 end
 %% test plots    
-plot(snr_clean); hold on; 
-plot(idx,snr_clean(idx),'o')
-plot(mean_idx, SRT, 'x')
+% plot(snr_clean); hold on; 
+% plot(idx,snr_clean(idx),'o')
+% plot(mean_idx, SRT, 'x')
 end
 
