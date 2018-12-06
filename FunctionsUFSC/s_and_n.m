@@ -23,12 +23,17 @@ else
     
     S_mix = S+N;    %mixed signal
     
-%%%%%%%%%%%% normalization is off so that the speech level is always the same
-
+% %%%%%%%%%%%% normalization is off so that the speech level is always the same
+% 
 %     %% normalize the signals so that the power of the output noisy signal is
 %     %% equal to the one of the input target audio
 %     P_mix = norm(S_mix,2)^2;    %power of the mixed signal     
 %     S_mix = S_mix * sqrt(P_S/P_mix);
 %     S = S * sqrt(P_S/P_mix);
 %     N = N * sqrt(P_S/P_mix);
+
+% %%%%%%%% Noise signal untouched
+%     S_mix = S_mix * 1/a;
+%     S = S * 1/a;
+%     N = N * 1/a;
 end
