@@ -29,7 +29,10 @@ classdef SignalY < handle
     end
     
     methods
-        function obj = SignalY(xf,nf,snrDB) %constructor
+        function obj = SignalY(xf,nf,snrDB,varargin) %constructor
+            if nargin > 3
+                obj.fs = varargin{4};
+            end
             if nargin > 0
                 obj.Xfile = xf;
                 obj.Nfile = nf;
