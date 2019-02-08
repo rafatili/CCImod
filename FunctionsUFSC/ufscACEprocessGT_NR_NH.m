@@ -16,3 +16,26 @@ fout = p.SamplingFrequency;
 
 vocoder_type = 'CI';
 [vocoded_signal] = CI_Vocoder_Cochlear_envInput(v1,fs,vocoder_type, rms_x, fout);
+
+if ~isempty(varargin)
+    if varargin{1} == 1;
+        %% Plot Electrodogram
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        u=figure;
+        spgrambw(vocoded_signal, fout,'J');
+        colormap('hot');
+        
+        if strcmp(p.lr_select,'left');
+            pos = 'northeast';
+            u.Name = 'Spectrogram: left ear';
+        else
+            pos = 'southeast';
+            u.Name = 'Spectrogram: right ear';
+        end
+        movegui(u, pos)
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        if length(varargin) > 1
+            warning('first argument is used as a flag for plotting the spectrodogram. All other arguments are ignored');
+        end
+    end
+end

@@ -261,7 +261,8 @@ synthesizer_y_aural = synthesizer_y_aural * gainfaktor_zerofine;
 synthesizer_y_aural = resample(synthesizer_y_aural,f_out,parameter.voc_sampling_frequency_hz);
 val = max(abs(synthesizer_y_aural));
 if val>1,
-    warning('Signal clipped!');
+    warning('Signal clipped! Amplitude is divided by %.2f',val);
+    synthesizer_y_aural = synthesizer_y_aural/val; % Rafael Chiea - if signal clipped, gain is readjusted.
 end
 vocoded_signal = synthesizer_y_aural'; %Make mono channel
 % vocoded_signal = vocoded_signal(1:length(signal)); 
