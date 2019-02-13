@@ -1,12 +1,12 @@
 %test script for the modACE function
-close all; clearvars;
+close all; clearvars;clc;
 
 p = initialize_ACE;
 handles.parameters = p;
-speechfile = 'M0002002.WAV';%'S_01_01.wav';
+speechfile = 'Lista2B_frase1.wav';%'S_01_01.wav';
 
-noisefile = '4talker-babble_ISTS.wav';
-SNRdB = 0;
+noisefile = '4talker-babble_ISTS.wav'; %'ICRA_No01_16kHz_21s.wav'; 
+SNRdB = -20;
 
 %% GENERATE Y noisy, X speech AND V noise SIGNALS
 % y = x + v
@@ -23,29 +23,38 @@ v = sgnls.noise;
 
 %% noise reduction
 tech = 'WF';%'EnvEst'; %noise reduction technique: 'EnvEst', 'WF', 'BM','none'
-%% stimulate
+%% vocoder WF
 plotflag = 0; %plot electrodogram
-vtype = 'white'; %vocoder type (white || CIsim)
-stimuli = mod_stimulateGT_NR_NH(y,x,v, handles.parameters, tech, vtype, plotflag); %use gammatone filters
+vtype = 'CIsim'; %vocoder type (white || CIsim)
+vWF = mod_stimulateGT_NR_NH(y,x,v, handles.parameters, tech, vtype, plotflag); %use gammatone filters
 
-%% reference vocoder
-vtype = 'CIsim';
-[vSig] = mod_stimulateGT_NR_NH(y,x,v, handles.parameters, tech, vtype, plotflag);
+%% vocoder EnvEst
+tech = 'EnvEst';
+[vEnv] = mod_stimulateGT_NR_NH(y,x,v, handles.parameters, tech, vtype, plotflag);
+
+%% vocoder clean speech
+tech = 'none';
+[vCl] = mod_stimulateGT_NR_NH(x,x,zeros(size(x)), handles.parameters, tech, vtype, plotflag);
 
 %% spectrograms figure
 figure;
-subplot(1,2,1)
-spgrambw(stimuli,f0,'J');
+subplot(1,3,1)
+spgrambw(vCl,f0,'J');
 colormap('hot');
-title('vocoded - white');
+title('vocoded - Clean');
 
-subplot(1,2,2)
-spgrambw(vSig,f0,'J');
+subplot(1,3,2)
+spgrambw(vWF,f0,'J');
 colormap('hot');
-title('vocoded - CIsim');
+title('vocoded - WF');
+
+subplot(1,3,3)
+spgrambw(vEnv,f0,'J');
+colormap('hot');
+title('vocoded - Env');
 
 %% Preperation and presentation of original and vocoded signal
 Silence = zeros(f0, 1);
-Presentation = [y; Silence; vSig; Silence; stimuli];
+Presentation = [vCl; Silence; vWF; Silence; vEnv];
 player = audioplayer(Presentation, f0);
 play(player);
