@@ -81,9 +81,9 @@ aWF = AOK(1:L)./Atot(1:L);
 aEnv = AOK(L+1:end)./Atot(L+1:end);
 
 h = figure;
-plot(snr,aWF,'o-');
+plot(snr,100*aWF,'o-');
 hold on
-plot(snr,aEnv,'o-');
+plot(snr,100*aEnv,'o-');
 
 ylabel('Correct works(%)');
 xlabel('SNR [dB]');
