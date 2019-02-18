@@ -85,7 +85,7 @@ plot(snr,100*aWF,'o-');
 hold on
 plot(snr,100*aEnv,'o-');
 
-ylabel('Correct works(%)');
+ylabel('Correct words(%)');
 xlabel('SNR [dB]');
 legend({'WF', 'EnvEst.'});
 title('Total of correct words over total of words')
