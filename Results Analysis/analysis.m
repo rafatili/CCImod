@@ -230,10 +230,9 @@ for ii = 1:3
     subjectidx(nancols) = [];
     
     figure(qf(ii))
-    
+    subplot(1,2,1)
     [~, Mfiles] = size(M);
     
-    subplot(1,2,1)
     data = M(1:10,:);
     data = [data(:);data(:)];
     
@@ -254,6 +253,7 @@ for ii = 1:3
     ylim([-5,+5])
     
     %% test repetition data
+    figure(qf(ii))
     subplot(1,2,2)
     data = M(11:end,:);
     data = [data(:);data(:)];
