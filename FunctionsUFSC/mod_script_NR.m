@@ -23,7 +23,7 @@ end
 cd(olddir) %
 %%
 noisefile = 'ICRA_No01_16kHz_21s.wav';
-SNRdB = -10;
+SNRdB = Inf;
 
 %% GENERATE Y noisy, X speech AND V noise SIGNALS
 % y = x + v
@@ -33,7 +33,7 @@ x = sgnls.target;
 v = sgnls.noise;
 
 %% noise reduction
-tech = 'EnvEst'; %noise reduction technique: 'EnvEst', 'WF', 'BM','none'
+tech = 'none'; %noise reduction technique: 'EnvEst', 'WF', 'BM','none'
 %% stimulate
 plotflag = 1; %plot electrodogram
 stimuli = mod_stimulateGT_NR(y,x,v, handles.parameters, tech, plotflag); %use gammatone filters

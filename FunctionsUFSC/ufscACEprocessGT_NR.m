@@ -7,10 +7,10 @@ function [ stimulus ] = ufscACEprocessGT_NR( x,p, NRgains, varargin )
 
 [x, p] = ACE_preEmphasis(x, p);
 [ v ] = ACE_GammaToneFB( x, p ); % GammaTone filterbank
-[ v ] = ACE_filterNR( v, NRgains ); % apply noise reduction
-[ v ] = ACE_maximaSelection( v, p );
-[v, ~, ~] = ACE_compression( v, p );
-[ q ] = ACE_mapping( v, p );
+[ v1 ] = ACE_filterNR( v, NRgains ); % apply noise reduction
+[ v2 ] = ACE_maximaSelection( v1, p );
+[v3, ~, ~] = ACE_compression( v2, p );
+[ q ] = ACE_mapping( v3, p );
 [ stimulus ] = ACE_stimuli( q );
 
 if ~isempty(varargin)
