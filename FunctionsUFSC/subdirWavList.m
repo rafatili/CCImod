@@ -14,6 +14,7 @@ for K = 1 : length(dirinfo)
     aux = [dir(fullfile(directory,thisdir, '*.WAV'));...
         dir(fullfile(directory,thisdir, '*.wav'))];
     lst = {aux.name}';
-    subdir(count+1:count+length(aux)) = fullfile(directory,thisdir,lst);
+    lst = unique(lst);
+    subdir(count+1:count+length(lst)) = fullfile(directory,thisdir,lst);
     count = count+length(aux);
 end
