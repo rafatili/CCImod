@@ -2,7 +2,9 @@
 % ACE_Process - partials
 % derived from ACE_Process function (UTD)
 
-% Rafael Chiea Set '18
+% Rafael Chiea Jan '19
+
+% all-pass filter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function [x_out, pmod] = ACE_preEmphasis_NH(x, p)
