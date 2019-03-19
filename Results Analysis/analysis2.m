@@ -1,4 +1,4 @@
-% analyse data of the 1st trials, with snr = [-15, -20, -25, -30, -35]
+% analyse data of the 1st trials, with snr = [-5, -10, -15, -20, -25]
 
 clc; close all; clearvars;
 
@@ -42,9 +42,25 @@ for ii = 1:Lfiles;
     if isfield(resultados,'snr')
         snr = resultados.snr;
     else
-        snr = -15:-5:-35; %on the first simulation this info was not saved
+        snr = -5:-5:-25; %on the first simulation this info was not saved
     end
     
+    %% rearranges values from old experiments
+    if ~isempty(find(snr == -30,1)) %check if data is from early acquisitions
+        [pathstr,name,ext] = fileparts(filename);
+        aux = load(fullfile(pathstr,strcat(name,'2',ext)));
+        resultados.numTotalPalavras = [aux.resultados.numTotalPalavras(:,1:2), ...
+            resultados.numTotalPalavras(:,1:3), ...
+            aux.resultados.numTotalPalavras(:,3:4), ...
+            resultados.numTotalPalavras(:,6:8)];
+        resultados.numAcertos = [aux.resultados.numAcertos(:,1:2), ...
+            resultados.numAcertos(:,1:3), ...
+            aux.resultados.numAcertos(:,3:4), ...
+            resultados.numAcertos(:,6:8)];  
+        snr = -5:-5:-25;
+    end
+    
+    %%
     L = length(snr);
     
     Ntot = resultados.numTotalPalavras;
