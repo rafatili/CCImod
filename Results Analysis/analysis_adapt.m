@@ -1,4 +1,4 @@
-close all; clearvars; clc;
+clearvars; clc;
 
 load('/home/rafael/CCImod/Results/old/Marina Brum_INT.mat');
 Ntot = resultados.numTotalPalavras;
