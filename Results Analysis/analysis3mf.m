@@ -30,13 +30,13 @@ else
     spRs = ceil(Lfiles/maxcols);
 end
 
-aWFfem = zeros(Lfiles,5); %considering 5 snr values
-aEnvfem = zeros(Lfiles,5);
-aWFmale = zeros(Lfiles,5); %considering 5 snr values
-aEnvmale = zeros(Lfiles,5);
+aWFfem = zeros(Lfiles,5); %considering 5 snr values; correct word rate for female voiced list with WF
+aEnvfem = zeros(Lfiles,5); % correct word rate for female voiced list with EnvEst
+aWFmale = zeros(Lfiles,5); % correct word rate for male voiced list with WF
+aEnvmale = zeros(Lfiles,5); % correct word rate for male voiced list with EnvEst
 
-aWF = zeros(Lfiles,5); %considering 5 snr values
-aEnv = zeros(Lfiles,5);
+aWF = zeros(Lfiles,5); % correct word rate for all lists with WF
+aEnv = zeros(Lfiles,5);% correct word rate for all lists with EnvEst
 
 for ii = 1:Lfiles;
 
@@ -150,7 +150,7 @@ for ii = 1:Lfiles;
     subplot(spRs,spCs,ii)
     plot(snr,100*aWF(ii,:),'o-');
     hold on
-    plot(snr,100*aEnv(ii,:),'o-');
+    plot(snr,100*aEnv(ii,:),'d-');
     
     ylabel('Correct words(%)');
     xlabel('SNR [dB]');
@@ -183,15 +183,15 @@ if Lfiles > 1
     bp2 = figure; %figure for boxplot2
     %reorganize the rate matrix
     [row,col] = size(aWFfem);
-    rate2 = zeros(row,col+L);
-    dummycol = nan*ones(row,1);
+    rate2 = zeros(2*row,col+L);
+    dummycol = nan*ones(2*row,1);
     
     X1 = [0 1 2];
     Xpos = zeros(1,3*L);
     for jj = 0:L-1;
-        rate2(:,jj*3+1) = aWFfem(:,L-jj);
+        rate2(:,jj*3+1) = [aWFfem(:,L-jj); aWFmale(:,L-jj)];
         rate2(:,jj*3+2) = dummycol;
-        rate2(:,jj*3+3) = aEnvfem(:,L-jj);
+        rate2(:,jj*3+3) = [aEnvfem(:,L-jj);aEnvmale(:,L-jj)];
         
         Xpos(jj*3+(1:3)) = X1 + jj*10;
     end
@@ -222,27 +222,27 @@ if Lfiles > 1
     legend({'WF', 'EnvEst.'},'Location','northwest');
     ylim([-10,110])
     
-    %% plot 2
-    bp3 = figure; %figure for boxplot2
-    %reorganize the rate matrix
-    [row,col] = size(aWFfem);
-    
-    delta = aEnvfem - aWFfem;
-    delta = fliplr(delta);
-    %boxplot
-    figure(bp3)
-   
-    % regular plot
-    boxplot(delta*100, 'plotstyle', 'compact', ...
-        'labels', fliplr(snr), 'LabelOrientation','horizontal'); % label only two categories
-    
-    ttl = 'All subjects';
-    title(ttl)
-    
-    ylabel('$\Delta$ Correct words [\%] (Env - WF))', 'interpreter', 'Latex');
-    xlabel('SNR [dB]');
-    
-    ylim([-10,110])
+%     %% plot 2
+%     bp3 = figure; %figure for boxplot2
+%     %reorganize the rate matrix
+%     [row,col] = size(aWFfem);
+%     
+%     delta = aEnvfem - aWFfem;
+%     delta = fliplr(delta);
+%     %boxplot
+%     figure(bp3)
+%    
+%     % regular plot
+%     boxplot(delta*100, 'plotstyle', 'compact', ...
+%         'labels', fliplr(snr), 'LabelOrientation','horizontal'); % label only two categories
+%     
+%     ttl = 'All subjects';
+%     title(ttl)
+%     
+%     ylabel('$\Delta$ Correct words [\%] (Env - WF))', 'interpreter', 'Latex');
+%     xlabel('SNR [dB]');
+%     
+%     ylim([-10,110])
 end
 %% quality test
 
