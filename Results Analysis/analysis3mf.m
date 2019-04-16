@@ -13,6 +13,8 @@ bpf = figure; %boxplot figure
 bpf.Name = 'Data distribution';
 hf = figure; %individual intelligibility performance
 hf.Name = 'Total of correct words over total of words';
+hf9 = figure; %individual intelligibility performance
+hf9.Name = 'Total of correct words over total of words male/female lists';
 
 if iscell(fnames)
     Lfiles = length(fnames);
@@ -159,22 +161,22 @@ for ii = 1:Lfiles;
     title(ttl)
     ylim([-10,110])
     
-%     figure(hf9)
-%     subplot(spRs,spCs,ii)
-%     plot(snr,100*aWFfem(ii,:),'o-','color', c0(1,:));
-%     hold on
-%     plot(snr,100*aWFmale(ii,:),'d-','color', c0(1,:));
-%     hold on
-%     plot(snr,100*aEnvfem(ii,:),'o-','color', c0(2,:));
-%     hold on
-%     plot(snr,100*aEnvmale(ii,:),'d-','color', c0(2,:));
-%     
-%     ylabel('Correct words(%)');
-%     xlabel('SNR [dB]');
-%     legend({'WF female', 'WF male', 'EnvEst. female', 'EnvEst. male'},'Location','northwest');
-%     ttl = sprintf('S%d',ii); %('%s', filename(1:end-8));
-%     title(ttl)
-%     ylim([-10,110])
+    figure(hf9)
+    subplot(spRs,spCs,ii)
+    plot(snr,100*aWFfem(ii,:),'o-','color', c0(1,:));
+    hold on
+    plot(snr,100*aWFmale(ii,:),'d--','color', c0(1,:));
+    hold on
+    plot(snr,100*aEnvfem(ii,:),'o-','color', c0(2,:));
+    hold on
+    plot(snr,100*aEnvmale(ii,:),'d--','color', c0(2,:));
+    
+    ylabel('Correct words(%)');
+    xlabel('SNR [dB]');
+    legend({'WF female', 'WF male', 'EnvEst. female', 'EnvEst. male'},'Location','northwest');
+    ttl = sprintf('S%d',ii); %('%s', filename(1:end-8));
+    title(ttl)
+    ylim([-10,110])
 end
 
 %% plots for all subjects together
