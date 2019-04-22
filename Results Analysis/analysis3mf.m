@@ -196,7 +196,7 @@ if Lfiles > 1
         rate2(:,jj*3+3) = [aEnvfem(:,L-jj);aEnvmale(:,L-jj)];
         
         Xpos(jj*3+(1:3)) = X1 + jj*10;
-    end
+    end    
     
     %boxplot
     figure(bp2)
@@ -221,8 +221,29 @@ if Lfiles > 1
     ylabel('Correct words(%)');
     xlabel('SNR [dB]');
     
-    legend({'WF', 'EnvEst.'},'Location','northwest');
+    legend({'WF', 'EnvEst.'},'Location','southeast');
     ylim([-10,110])
+    
+    %% test if ditributions are different (Wilcoxon test) @ each SNR
+    ptest = zeros(1,col); %result of the test (Wilcoxon)
+%    p2test = zeros(1,col); %result of the test (T-test)
+    
+    for jj = 1:col;
+        [p,h] = ranksum(rate2(:,(jj-1)*3+1),rate2(:,(jj-1)*3+3));
+ %       [h2,p2] = ttest(rate2(:,(jj-1)*3+1),rate2(:,(jj-1)*3+3));
+        if h == 0;            
+            xx = Xpos((jj-1)*3+2);
+            plot(xx,100, 'k+', 'LineWidth', 2)
+            hold on
+        end
+%         if h2 == 0;            
+%             xx = Xpos((jj-1)*3+2);
+%             plot(xx,102, 'kd', 'LineWidth', 2)
+%             hold on
+%         end
+        ptest(jj) = p;
+ %       p2test(jj) = p2;
+    end
     
 %     %% plot 2
 %     bp3 = figure; %figure for boxplot2
@@ -270,10 +291,9 @@ for ii = 1:Lfiles
     end
 end
 
-qf(1) = figure;
-qf(2) = figure;
-qf(3) = figure;
+qf = figure;
 
+pCorr = zeros(Lfiles,Lfiles,3);
 for ii = 1:3
     M = Qs(:,:,ii);
     nancols = all( isnan( M ), 1 );
@@ -281,12 +301,12 @@ for ii = 1:3
     subjectidx = 1:Lfiles;
     subjectidx(nancols) = [];
     
-    figure(qf(ii))
-    subplot(1,2,1)
+    figure(qf)
+    subplot(2,3,ii)
     [~, Mfiles] = size(M);
     
-    data = M(1:10,:);
-    data = [data(:);data(:)];
+    data01 = M(1:10,:);
+    data1 = [data01(:);data01(:)];
     
     grp = zeros(2*10*Mfiles,1);
     labels = cell(Mfiles+1,1);
@@ -297,7 +317,7 @@ for ii = 1:3
     grp(10*Mfiles+1:end) = Mfiles;
     labels{end} = 'All';
     
-    boxplot(data, grp, 'plotstyle', 'compact','labels', labels,'LabelOrientation','horizontal'); % label only two categories
+    boxplot(data1, grp, 'plotstyle', 'compact','labels', labels,'LabelOrientation','horizontal'); % label only two categories
     title(sprintf('%s with respect to %s', Qresultados.comb{ii,2}, Qresultados.comb{ii,1}))
     
     xlabel('Subjects')
@@ -305,10 +325,10 @@ for ii = 1:3
     ylim([-5,+5])
     
     %% test repetition data
-    figure(qf(ii))
-    subplot(1,2,2)
-    data = M(11:end,:);
-    data = [data(:);data(:)];
+    figure(qf)
+    subplot(2,3,3+ii)
+    data02 = M(11:end,:);
+    data2 = [data02(:);data02(:)];
     
     grp = zeros(2*10*Mfiles,1);
     labels = cell(Mfiles+1,1);
@@ -319,10 +339,26 @@ for ii = 1:3
     grp(10*Mfiles+1:end) = Mfiles;
     labels{end} = 'All';
     
-    boxplot(data, grp, 'plotstyle', 'compact','labels', labels,'LabelOrientation','horizontal'); % label only two categories
-    title(sprintf('%s with respect to %s', Qresultados.comb{ii,2}, Qresultados.comb{ii,1}))
+    boxplot(data2, grp, 'plotstyle', 'compact','labels', labels,'LabelOrientation','horizontal'); % label only two categories
+    %title(sprintf('%s with respect to %s', Qresultados.comb{ii,2}, Qresultados.comb{ii,1}))
     
     xlabel('Subjects')
     ylabel('Quality evaluation')
     ylim([-5,+5])
+    
+    %% agreement analysis
+    pCorr = corr(data01,data02);
+    agree = calcAgreement(data01,data02)';
+    rpc = zeros(Lfiles,1);
+    pWilcox = zeros(Lfiles,1);
+    hWilcox = zeros(Lfiles,1);
+    for jj=1:Lfiles
+        [rpc(jj), f] = BlandAltman(data01(:,jj),data02(:,jj),'baStatsMode','Non-parametric'); 
+        close(f);
+        [pWilcox(jj), hWilcox(jj)] = ranksum(data01(:,jj),data02(:,jj));
+    end
+    subject = (1:Lfiles)';
+    pearson = diag(pCorr);
+    fprintf(1,'%s with respect to %s\n', Qresultados.comb{ii,2}, Qresultados.comb{ii,1});
+    disp(table(subject,pearson,agree,rpc,pWilcox,hWilcox))
 end
