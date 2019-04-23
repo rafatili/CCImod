@@ -52,21 +52,25 @@ for ii = 1:Lfiles;
     aClean(ii,:) = AOK(1:L)./Atot(1:L);
 end
 
-if Lfiles > 1
-    %% plot 1
-    bp2 = figure; %figure for boxplot2
-    %reorganize the rate matrix
-    
-    %boxplot
-    figure(bp2)   
-    % regular plot
-    boxplot(aClean*100, 'plotstyle', 'compact','labels', 'Clean Speech','LabelOrientation','horizontal'); % label only two categories
-    
-    ax = gca;
-    ax.XLim = ax.XLim + [-1,+1]*5;
-    ttl = 'All subjects - Clean speech Intelligibility';
-    title(ttl)
-    
-    ylim([-10,110])
+% if Lfiles > 1
+%     %% plot 1
+%     bp2 = figure; %figure for boxplot2
+%     %reorganize the rate matrix
+%     
+%     %boxplot
+%     figure(bp2)   
+%     % regular plot
+%     boxplot(aClean*100, 'plotstyle', 'compact','labels', 'Clean Speech','LabelOrientation','horizontal'); % label only two categories
+%     
+%     ax = gca;
+%     ax.XLim = ax.XLim + [-1,+1]*5;
+%     ttl = 'All subjects - Clean speech Intelligibility';
+%     title(ttl)
+%     
+%     ylim([-10,110])
+% 
+% end
 
-end
+fprintf(1,'Intel. média: %2.0f\n', mean(aClean)*100);
+fprintf(1,'Intel. mínima: %2.0f\n', min(aClean)*100);
+fprintf(1,'Intel. máxima: %2.0f\n', max(aClean)*100);

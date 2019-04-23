@@ -292,6 +292,7 @@ for ii = 1:Lfiles
 end
 
 qf = figure;
+qf2 = figure;
 
 pCorr = zeros(Lfiles,Lfiles,3);
 for ii = 1:3
@@ -360,5 +361,28 @@ for ii = 1:3
     subject = (1:Lfiles)';
     pearson = diag(pCorr);
     fprintf(1,'%s with respect to %s\n', Qresultados.comb{ii,2}, Qresultados.comb{ii,1});
-    disp(table(subject,pearson,agree,rpc,pWilcox,hWilcox))
+    %disp(table(subject,pearson,agree,rpc,pWilcox,hWilcox))
+    disp(table(subject,rpc,pWilcox))
+    %% plot test+retest
+    figure(qf2)
+    subplot(1,3,ii)
+    [rows, Mfiles] = size(M);
+    
+    data = [M(:);M(:)];
+    
+    grp = zeros(2*20*Mfiles,1);
+    labels = cell(Mfiles+1,1);
+    for jj = 1:Mfiles
+        grp((jj-1)*rows+1:(jj)*rows) = (jj-1)*ones(rows,1);
+        labels{jj} = sprintf('S%d', subjectidx(jj));
+    end
+    grp(rows*Mfiles+1:end) = Mfiles;
+    labels{end} = 'All';
+    
+    boxplot(data, grp, 'plotstyle', 'compact','labels', labels,'LabelOrientation','horizontal'); % label only two categories
+    title(sprintf('%s with respect to %s', Qresultados.comb{ii,2}, Qresultados.comb{ii,1}))
+    
+    xlabel('Subjects')
+    ylabel('Quality evaluation')
+    ylim([-5,+5])
 end
