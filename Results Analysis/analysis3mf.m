@@ -245,27 +245,28 @@ if Lfiles > 1
  %       p2test(jj) = p2;
     end
     
-%     %% plot 2
-%     bp3 = figure; %figure for boxplot2
-%     %reorganize the rate matrix
-%     [row,col] = size(aWFfem);
-%     
-%     delta = aEnvfem - aWFfem;
-%     delta = fliplr(delta);
-%     %boxplot
-%     figure(bp3)
-%    
-%     % regular plot
-%     boxplot(delta*100, 'plotstyle', 'compact', ...
-%         'labels', fliplr(snr), 'LabelOrientation','horizontal'); % label only two categories
-%     
-%     ttl = 'All subjects';
-%     title(ttl)
-%     
-%     ylabel('$\Delta$ Correct words [\%] (Env - WF))', 'interpreter', 'Latex');
-%     xlabel('SNR [dB]');
-%     
-%     ylim([-10,110])
+    %% plot 2
+    bp3 = figure; %figure for boxplot2
+    %reorganize the rate matrix
+    medR = median(rate2)*100;
+    minR = medR - min(rate2)*100;
+    maxR = max(rate2)*100 - medR;
+      
+    xWF = Xpos(1:3:end);
+    xEE = Xpos(3:3:end);
+    
+    figure(bp3)
+    errorbar(xWF, medR(1:3:end), minR(1:3:end),maxR(1:3:end),'o','color',c0(1,:));
+    hold on;
+    errorbar(xEE, medR(3:3:end), minR(3:3:end),maxR(3:3:end),'o','color',c0(2,:));
+    
+    ttl = 'All subjects';
+    title(ttl)
+    
+    ylabel('Correct words [\%] (Env - WF))', 'interpreter', 'Latex');
+    xlabel('SNR [dB]');
+    
+    ylim([-10,110])
 end
 %% quality test
 
@@ -354,7 +355,7 @@ for ii = 1:3
     pWilcox = zeros(Lfiles,1);
     hWilcox = zeros(Lfiles,1);
     for jj=1:Lfiles
-        [rpc(jj), f] = BlandAltman(data01(:,jj),data02(:,jj),'baStatsMode','Non-parametric'); 
+        [rpc(jj), f] = BlandAltman(data01(:,jj),data02(:,jj),'baStatsMode','non-parametric'); 
         close(f);
         [pWilcox(jj), hWilcox(jj)] = ranksum(data01(:,jj),data02(:,jj));
     end
