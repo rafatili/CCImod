@@ -245,28 +245,28 @@ if Lfiles > 1
  %       p2test(jj) = p2;
     end
     
-    %% plot 2
-    bp3 = figure; %figure for boxplot2
-    %reorganize the rate matrix
-    medR = median(rate2)*100;
-    minR = medR - min(rate2)*100;
-    maxR = max(rate2)*100 - medR;
-      
-    xWF = Xpos(1:3:end);
-    xEE = Xpos(3:3:end);
-    
-    figure(bp3)
-    errorbar(xWF, medR(1:3:end), minR(1:3:end),maxR(1:3:end),'o','color',c0(1,:));
-    hold on;
-    errorbar(xEE, medR(3:3:end), minR(3:3:end),maxR(3:3:end),'o','color',c0(2,:));
-    
-    ttl = 'All subjects';
-    title(ttl)
-    
-    ylabel('Correct words [\%] (Env - WF))', 'interpreter', 'Latex');
-    xlabel('SNR [dB]');
-    
-    ylim([-10,110])
+%     %% plot 2
+%     bp3 = figure; %figure for boxplot2
+%     %reorganize the rate matrix
+%     medR = median(rate2)*100;
+%     minR = min(rate2)*100;
+%     maxR = max(rate2)*100;
+%       
+%     xWF = Xpos(1:3:end);
+%     xEE = Xpos(3:3:end);
+%     
+%     figure(bp3)
+%     plot(xWF, rate2(:,1:3:end),'o','color',c0(1,:));
+%     hold on;
+%     plot(xEE, rate2(:,3:3:end),'d','color',c0(2,:));
+%     
+%     ttl = 'All subjects';
+%     title(ttl)
+%     
+%     ylabel('Correct words [\%] (Env - WF))', 'interpreter', 'Latex');
+%     xlabel('SNR [dB]');
+%     
+%     ylim([-10,110])
 end
 %% quality test
 
