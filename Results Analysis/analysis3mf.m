@@ -45,6 +45,8 @@ for ii = 1:Lfiles;
     filename = fnames{ii};
     %
     load(filename)
+    aux=fileparts(filename);
+    nhci = aux(end-1:end); %
     
     if isfield(resultados,'snr')
         snr = resultados.snr;
@@ -279,7 +281,9 @@ for ii = 1:Lfiles
     
     if exist(filename, 'file')
         load(filename)
-    
+        aux = fileparts(filename);
+        nhci = aux(end-1:end);
+        
         SNRqlt = -10; %dB
         
         Qs(:,ii,1) = Qresultados.resultados(:,1);
@@ -314,7 +318,7 @@ for ii = 1:3
     labels = cell(Mfiles+1,1);
     for jj = 1:Mfiles
         grp((jj-1)*10+1:(jj-1)*10+10) = (jj-1)*ones(10,1);
-        labels{jj} = sprintf('S%d', subjectidx(jj));
+        labels{jj} = sprintf('%s%d', nhci, subjectidx(jj));
     end
     grp(10*Mfiles+1:end) = Mfiles;
     labels{end} = 'All';
@@ -336,7 +340,7 @@ for ii = 1:3
     labels = cell(Mfiles+1,1);
     for jj = 1:Mfiles
         grp((jj-1)*10+1:(jj-1)*10+10) = (jj-1)*ones(10,1);
-        labels{jj} = sprintf('S%d', subjectidx(jj));
+        labels{jj} = sprintf('%s%d', nhci, subjectidx(jj));
     end
     grp(10*Mfiles+1:end) = Mfiles;
     labels{end} = 'All';
@@ -362,8 +366,8 @@ for ii = 1:3
     subject = (1:Lfiles)';
     pearson = diag(pCorr);
     fprintf(1,'%s with respect to %s\n', Qresultados.comb{ii,2}, Qresultados.comb{ii,1});
-    %disp(table(subject,pearson,agree,rpc,pWilcox,hWilcox))
-    disp(table(subject,rpc,pWilcox))
+    disp(table(subject,pearson,agree,rpc,pWilcox,hWilcox))
+    %disp(table(subject,rpc,pWilcox))
     %% plot test+retest
     figure(qf2)
     subplot(1,3,ii)
@@ -375,7 +379,7 @@ for ii = 1:3
     labels = cell(Mfiles+1,1);
     for jj = 1:Mfiles
         grp((jj-1)*rows+1:(jj)*rows) = (jj-1)*ones(rows,1);
-        labels{jj} = sprintf('S%d', subjectidx(jj));
+        labels{jj} = sprintf('%s%d', nhci, subjectidx(jj));
     end
     grp(rows*Mfiles+1:end) = Mfiles;
     labels{end} = 'All';
