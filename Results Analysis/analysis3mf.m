@@ -359,6 +359,9 @@ for ii = 1:3
     pWilcox = zeros(Lfiles,1);
     hWilcox = zeros(Lfiles,1);
     for jj=1:Lfiles
+        if isequal(data01(:,jj),data02(:,jj))
+            data02(:,jj) = data02(:,jj)+eps*randn(size(data02(:,jj)));    %introduz mínima diferença para evitar erro da função BlandAltman
+        end
         [rpc(jj), f] = BlandAltman(data01(:,jj),data02(:,jj),'baStatsMode','non-parametric'); 
         close(f);
         [pWilcox(jj), hWilcox(jj)] = ranksum(data01(:,jj),data02(:,jj));

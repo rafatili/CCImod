@@ -16,14 +16,14 @@ MAP.General.StimulateEars    = 'Left';        % 'Left' for left only; 'Right' fo
 
 %% Left Ear Parameters
 %  remove this section if left side does not exist
-MAP.Left.ImplantType        = 'CI24RE';     %Implant chip type, e.g., CI24RE(CS/CA), CI24R, CI24M, CI22M, ST
+MAP.Left.ImplantType        = 'CI24RE(CS/CA)';     %Implant chip type, e.g., CI24RE(CS/CA), CI24R, CI24M, CI22M, ST
 MAP.Left.SamplingFrequency  = 16000;        % Fixed
 MAP.Left.NumberOfChannels   = 22;           % 22 fixed for imlants from Cochlear Ltd.
 MAP.Left.Strategy           = 'ACE';        % 'ACE' or 'CIS' or 'Custom'
 MAP.Left.Nmaxima            = 8;            % Nmaxima 1 - 22 for n-of-m strategies
 MAP.Left.StimulationMode    = 'MP1+2';      % Electrode Configuration/Stimulation mode e.g., MP1, MP1+2, BP1, BP1+2, CG,....etc.
 MAP.Left.StimulationRate    = 900;         % Stimulation rate per electrode in number of pulses per second (pps)
-MAP.Left.PulseWidth         = 25;           % Pulse width in us
+MAP.Left.PulseWidth         = 37;           % Pulse width in us
 MAP.Left.IPG                = 8;            % Inter-Phase Gap (IPG) fixed at 8us (could be variable in future)
 MAP.Left.Sensitivity        = 2.3;          % Microphone Sensitivity (adjustable in GUI)
 MAP.Left.Gain               = 25;           % Global gain for envelopes in dB - standard is 25dB (adjustable in GUI)
