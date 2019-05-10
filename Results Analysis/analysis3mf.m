@@ -120,7 +120,7 @@ for ii = 1:Lfiles;
     
     ax = gca;
     ax.XLim = ax.XLim + [-1,+1]*5;
-    ttl = sprintf('S%d',ii); %('%s', filename(1:end-8));
+    ttl = sprintf('%s%d',nhci,ii); %('%s', filename(1:end-8));
     title(ttl)
     
     hold on;
@@ -159,7 +159,7 @@ for ii = 1:Lfiles;
     ylabel('Correct words(%)');
     xlabel('SNR [dB]');
     legend({'WF', 'EnvEst.'},'Location','northwest');
-    ttl = sprintf('S%d',ii); %('%s', filename(1:end-8));
+    ttl = sprintf('%s%d',nhci,ii); %('%s', filename(1:end-8));
     title(ttl)
     ylim([-10,110])
     
