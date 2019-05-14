@@ -176,7 +176,7 @@ for ii = 1:Lfiles;
     ylabel('Correct words(%)');
     xlabel('SNR [dB]');
     legend({'WF female', 'WF male', 'EnvEst. female', 'EnvEst. male'},'Location','northwest');
-    ttl = sprintf('S%d',ii); %('%s', filename(1:end-8));
+    ttl = sprintf('%s%d',nhci,ii); %('%s', filename(1:end-8));
     title(ttl)
     ylim([-10,110])
 end
